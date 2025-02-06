@@ -1,0 +1,117 @@
+.my-form-group textarea{
+    height: 45px !important;
+}
+
+.my-contact-form-small input{
+    margin-bottom: 25px !important;
+}
+
+.my-header-logo{
+    margin-top: 25px !important;
+}
+
+.my-icon-box span{
+    font-size: 10px;
+}
+
+.my-footer-logo-area img{
+    width: 100%;
+    padding-right: 40px;
+}
+
+.my-home-service-content h5{
+    font-size: 25px;
+}
+
+.my-partner-links{
+    margin-bottom: 50px;
+}
+
+.my-partner-links ul li{
+    font-size: 12px;
+}
+
+.my-tool{
+    color: white !important;
+    width: 140px !important;
+    height: 30px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    line-height: 30px !important;
+}
+
+.my-gallery img{
+    height: 200px !important;
+    width: 300px;
+}
+
+.my-home-about-us p{
+    font-weight: bolder;
+    color: #1d1a1a;
+
+}
+.my-home-about-us .testimonial__carousel{
+    top:-40px !important;
+}
+
+
+.my-home-about-us p span{
+    color: #4ab9cf;
+    font-size: 10px;
+}
+
+.my-home-partners span{
+    font-weight: bold;
+    color: black;
+    font-size: 20px;
+    text-align: center;
+    display: block;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.065);
+}
+
+.my-home-partners img{
+    opacity: 1.0 !important;
+    height: 80px !important;
+}
+
+.my-header__logo p{
+    font-size: 10px;
+    color: black;
+    font-weight: bold;
+}
+
+.my-home-flag img{
+    height: 45px;
+    width: 90px;
+}
+
+.my-home-flag{
+    width: 120px;
+}
+
+.my-testimonial__carousel--left, .my-testimonial__carousel--right{
+    height: 20px !important;
+    width: 20px !important;
+    margin-left: 0px !important;
+}
+
+.my-testimonial__carousel-h h5{
+    font-size: 20px;
+    margin-top: 0px;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.my-testimonial__carousel-h p{
+    color: black;
+    font-size: 12px;
+}
+
+.my-footer-logo-area span{
+    color: black;
+    margin-top: -25px;
+    display: block;
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 5px;
+}

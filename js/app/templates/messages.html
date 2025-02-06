@@ -1,0 +1,35 @@
+<!--<div class="error-message" ng-message="required">必填字段</div>-->
+<div class="error-message" ng-message="required">The field is required</div>
+<div class="error-message" ng-message="minlength">The field's length is too short</div>
+<div class="error-message" ng-message="maxlength">Your password should be less than 20 characters.</div>
+<div class="error-message" ng-message="required">This field is required</div>
+<div class="error-message" ng-message="email">Email is invalid</div>
+<div class="error-message" ng-message="invalidEmailError">Email is invalid</div>
+<div class="error-message" ng-message="number">Only number is allowed, please re-enter</div>
+<div class="error-message" ng-message="compareTo">New password and confirm password are not matched</div>
+<div class="error-message" ng-message="comparePassword">passwords don't match</div>
+<!--<div class="error-message" ng-message="pattern">The password must contain the following:<ol style="list-style-type: circle;"><li>upper case letter</li><li>lower case letter</li><li>number</li></ol></div>-->
+<div class="error-message" ng-message="complexity">The password should contain at least 3 of the following:
+    <ol style="list-style-type: circle;">
+        <li>Upper letter</li>
+        <li>Lowercase letter</li>
+        <li>Number</li>
+        <li>Special charactor (~,!,#,%,^,&,*)</li>
+    </ol>
+</div>
+<!--upper case letter, lowercase letter, number, special character (~,!,#,%,^,&,*). You CANNOT use the at sign (@) or the dollar sign ($).-->
+<div class="error-message" ng-message="nonCommaError">Should not contains comma.</div>
+<div class="error-message" ng-message="nzNumberLengthError">New Zealand Bank Account's Length Should 15 or 16.</div>
+<div class="error-message" ng-message="numberLettersOnlyError">Should contains letters and numbers only.</div>
+<div class="error-message" ng-message="numberLettersSpaceOnlyError">Should contains letters or numbers or spaces only.</div>
+<div class="error-message" ng-message="addressValidateError">This field should only contains letters/numbers and / . , # -.</div>
+<div class="error-message" ng-message="validPassword">Must contain one lower &amp; uppercase letter, and one non-alpha character (a number or
+    a symbol.)
+</div>
+
+<style>
+    .error-message {
+        color: red;
+        margin-top: -20px;
+    }
+</style>

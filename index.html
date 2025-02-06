@@ -1,0 +1,1680 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+
+<!-- Mirrored from www.freightdirect.co.nz/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 06 Sep 2021 11:31:30 GMT -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8"/><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="1oEzyHnzBhoQ8ivo4thoFprobwiLeAaBspdSivFufTw"/>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Freight Direct</title>
+
+    <base href="freight-direct">
+    <!-- Styling -->
+    <link href="cargopress/css/custom.css" rel="stylesheet">
+    <link href="cargopress/css/style.css" rel="stylesheet">
+    <link href="cargopress/css/magnific-popup.css" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Roboto%3A400%2C700%7CSource+Sans+Pro%3A700%2C900&amp;subset=latin"
+          rel="stylesheet">
+    <link rel="shortcut icon" href="cargopress/images/favicon-32x32.png">
+
+    <script src="cargopress/js/modernizr.custom.24530.js" type="text/javascript"></script>
+
+    <!-- angular plugin css -->
+    <link href="js/app-libs/please-wait/please-wait.css" rel="stylesheet"/>
+    <link href="js/app-libs/SpinKit/css/spinkit.css" rel="stylesheet"/>
+    <link href="js/app-libs/angular-busy-tracker/busy.min.css" rel="stylesheet"/>
+    <link href="js/app-libs/ng-dialog/css/ngDialog.min.css" rel="stylesheet"/>
+    <link href="js/app-libs/ng-dialog/css/ngDialog-theme-default.min.css" rel="stylesheet"/>
+    <link href="js/app-libs/highcharts-ng/highcharts-ng.css" rel="stylesheet"/>
+    <link href="js/app-libs/angular-wizard/dist/angular-wizard.min.css" rel="stylesheet"/>
+    <link href="js/app-libs/dropzone/min/dropzone.min.css" rel="stylesheet"/>
+    <link href="js/app-libs/ng-dropzone/dist/ng-dropzone.css" rel="stylesheet"/>
+    <link href="js/app-libs/angular-datepicker/angular-datepicker.css" rel="stylesheet"/>
+    <link href="js/app-libs/ng-toast/ngToast.min.css" rel="stylesheet"/>
+    <link href="js/app-libs/ng-toast/ngToast-animations.min.css" rel="stylesheet"/>
+    <!-- Fixing Internet Explorer ______________________________________-->
+
+    <style type="text/css">
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
+    </style>
+    <script type="text/ng-template" id="needLoginTemplate">
+        <div class="theme_title_center align_center">
+            <br>
+            <h3>请先登陆</h3>
+            <span></span>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right service_page_main_post align_center">
+                <div class="wrapper" style="text-align: center">
+                    <p>您需要先登陆才能进行下一步操作</p>
+                    <br>
+                    <br>
+                    <a href="/signin" class="btn-upper btn btn-primary checkout-page-button">
+                        去登陆
+                    </a>
+                </div>
+            </div>
+        </div>
+    </script>
+
+
+    <script type="text/ng-template" id="registerFormTemplate">
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right service_page_main_post align_center">
+                <div class="wrapper" style="text-align: center">
+                    <span class="slider-subtitle5 black-text no-margin-bottom">Modal dialog</span>
+                    <p class="margin-four">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                        Lorem
+                        Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                    <br>
+                    <br>
+                    <a class="highlight-button btn btn-very-small button popup-modal-dismiss no-margin"
+                       href="#">Dismiss</a>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/ng-template" id="payDialogModal">
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right service_page_main_post align_center">
+                <div class="wrapper" style="text-align: center">
+                    <span class="slider-subtitle5 black-text no-margin-bottom">Choose payment method</span>
+                    <br>
+                    <br>
+                    <a ng-repeat="gateway in gateways"
+                       style="cursor: pointer;"
+                       class="highlight-button btn btn-lg button popup-modal-dismiss no-margin" ng-click="pay(gateway)">
+                        {{gateway.type}}</a>
+                    <br>
+                    <br>
+                    <br>
+                    <a class="highlight-button btn btn-small button popup-modal-dismiss no-margin pull-right"
+                       ng-click="closePayDialog()">Dismiss</a>
+
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/ng-template" id="resetPasswordTemplate">
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right service_page_main_post align_center">
+                <div class="wrapper" style="text-align: center">
+                    <span class="slider-subtitle5 black-text no-margin-bottom">Password resetted </span>
+                    <h4 class="margin-four">An email has been sent to your mailbox, please check!</h4>
+                    <br>
+                    <br>
+                    <br>
+                    <a class="highlight-button btn btn-lg button popup-modal-dismiss no-margin"
+                       style="cursor: pointer;"
+                       ng-click="closerRsetPasswordModal()">OK</a>
+
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/ng-template" id="contactUsSuccessTemplate">
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right service_page_main_post align_center">
+                <div class="wrapper" style="text-align: center">
+                    <span class="slider-subtitle5 black-text no-margin-bottom">Message sent </span>
+                    <h4 class="margin-four">We will contact you later, thanks!</h4>
+                    <br>
+                    <br>
+                    <br>
+                    <a class="highlight-button btn btn-lg button popup-modal-dismiss no-margin"
+                       style="cursor: pointer;"
+                       ng-click="closeModal()">OK</a>
+
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/ng-template" id="contactUsFailTemplate">
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right service_page_main_post align_center">
+                <div class="wrapper" style="text-align: center">
+                    <span class="slider-subtitle5 black-text no-margin-bottom">Sorry error happens</span>
+                    <h4 class="margin-four">Please try again later</h4>
+                    <br>
+                    <br>
+                    <br>
+                    <a class="highlight-button btn btn-lg button popup-modal-dismiss no-margin"
+                       style="cursor: pointer;"
+                       ng-click="closeModal()">OK</a>
+
+                </div>
+            </div>
+        </div>
+    </script>
+    <script>
+        /* Google Map Market Settings */
+
+        var mapMarkers = [
+            {
+                "id": "1",
+                "title": "CargoPress",
+                "address": "Changi Airport, Singapore",
+                "custompinimage": "\/cargopress\/images\/pin.png"
+            }
+        ]
+    </script>
+
+</head>
+<body>
+
+<!-- MAIN PAGE CONTAINER -->
+<div class="boxed-container">
+
+    <!-- TOP BAR -->
+    <div class="top" ng-controller="cargoHeaderController" ng-cloak>
+
+        <div class="container">
+
+            <div class="top__tagline" ng-if="!isCn">WELCOME TO FREIGHT DIRECT</div>
+            <div class="top__tagline" ng-if="isCn">欢迎来到Freight Direct</div>
+
+            <nav class="top__menu">
+                <ul class="top-navigation js-dropdown my-tools-button">
+                    <li ng-if="isCn"><a href="about-us.html">关于我们</a></li>
+                    <li ng-if="!isCn"><a href="about-us.html">About Us</a></li>
+                    <li ng-if="isCn"><a href="contact.html">联系我们</a></li>
+                    <li ng-if="!isCn"><a href="contact.html">Contact Us</a></li>
+                    <li><a class="btn btn-info my-tool" target="_blank"
+                           href="http://fdnakl.webtracker.wisegrid.net/Login/Login.aspx?ReturnUrl=%2fDefault.aspx"
+                           ng-if="!isCn">customer login</a></li>
+                    <li><a class="btn btn-info my-tool" target="_blank"
+                           href="http://fdnakl.webtracker.wisegrid.net/Login/Login.aspx?ReturnUrl=%2fDefault.aspx"
+                           ng-if="isCn">用 户 登 录</a></li>
+                    <li ng-if="!isCn"><a style="cursor: pointer; color: black;" ng-click="setCn(true)"><i
+                            class="fa fa-language" aria-hidden="true"></i>&nbsp;中文</a></li>
+                    <li ng-if="isCn"><a style="cursor: pointer; color: black;" ng-click="setCn(false)"><i
+                            class="fa fa-language" aria-hidden="true"></i>&nbsp;English</a></li>
+                </ul>
+            </nav>
+
+        </div><!-- /.container -->
+
+    </div><!-- /.top -->
+
+    <!-- HEADER -->
+    <div class="header_container" ng-controller="cargoHeaderController" ng-cloak>
+
+        <div class="container">
+
+            <header class="header">
+
+                <div class="header__logo my-header__logo">
+                    <a href="index.html">
+                        <img style="width:346px; margin-bottom:34px; max-width: unset !important;margin-top: 3px !important;"
+                             class="img-responsive my-header-logo" srcset="cargopress/images/FD-logo.png"
+                             alt="CargoPress" src="cargopress/images/logo.png">
+                    </a>
+                    <button data-target="#cargopress-navbar-collapse" data-toggle="collapse" class="navbar-toggle"
+                            type="button">
+                        <span class="navbar-toggle__text" ng-if="!isCn">MENU</span>
+                        <span class="navbar-toggle__text" ng-if="isCn">目录</span>
+                        <span class="navbar-toggle__icon-bar">
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</span>
+                    </button>
+                </div><!-- /.header__logo -->
+
+                <div class="header__navigation">
+                    <nav class="collapse navbar-collapse" id="cargopress-navbar-collapse">
+                        <ul class="main-navigation js-main-nav js-dropdown">
+                            <li><a href="index.html" ng-if="!isCn">Home</a></li>
+                            <li><a href="index.html" ng-if="isCn">首页</a></li>
+
+                            <li><a href="news.html" ng-if="!isCn">News</a></li>
+                            <li><a href="news.html" ng-if="isCn">新闻</a></li>
+
+                            <li class="menu-item-has-children">
+                                <a href="services.html" ng-if="!isCn">Service</a>
+                                <a href="services.html" ng-if="isCn">服务</a>
+                                <ul role="menu" class="sub-menu">
+                                    <li><a href="cargo.html" ng-if="!isCn">CARGO</a></li>
+                                    <li><a href="cargo.html" ng-if="isCn">船运业务</a></li>
+
+                                    <li><a href="warehousing.html" ng-if="!isCn">WAREHOUSING</a></li>
+                                    <li><a href="warehousing.html" ng-if="isCn">仓储业务</a></li>
+
+                                    <li><a href="logistics-service.html" ng-if="!isCn">LOGISTICS SERVICE</a></li>
+                                    <li><a href="logistics-service.html" ng-if="isCn">物流服务</a></li>
+
+                                    <li><a href="trucking-service.html" ng-if="!isCn">TRUCKING SERVICE</a></li>
+                                    <li><a href="trucking-service.html" ng-if="isCn">运输服务</a></li>
+
+                                    <li><a href="storage.html" ng-if="!isCn">STORAGE</a></li>
+                                    <li><a href="storage.html" ng-if="isCn">第三方电商仓储</a></li>
+
+                                    <li><a href="custom-clearance.html" ng-if="!isCn">CUSTOMS CLEARANCE</a></li>
+                                    <li><a href="custom-clearance.html" ng-if="isCn">海关清关</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="menu-item-has-children">
+                                <a href="#" ng-if="!isCn">Partner links</a>
+                                <a href="#" ng-if="isCn">合作公司链接</a>
+                                <ul role="menu" class="sub-menu">
+                                    <li><a href="seafreight-links.html" ng-if="!isCn">SEAFREIGHT LINKS</a></li>
+                                    <li><a href="seafreight-links.html" ng-if="isCn">海洋货运链接</a></li>
+                                    <li><a href="shipping-lines.html" ng-if="!isCn">SHIPPING LINES</a></li>
+                                    <li><a href="shipping-lines.html" ng-if="isCn">海运线路</a></li>
+                                    <li><a href="port-links.html" ng-if="!isCn">PORT LINKS</a></li>
+                                    <li><a href="port-links.html" ng-if="isCn">港口链接</a></li>
+                                    <li><a href="courier-tracking-link.html" ng-if="!isCn">COURIER TRACKING LINK</a>
+                                    </li>
+                                    <li><a href="courier-tracking-link.html" ng-if="isCn">物流追踪链接</a></li>
+                                    <li><a href="documents.html" ng-if="!isCn">DOCUMENTS</a></li>
+                                    <li><a href="documents.html" ng-if="isCn">文档</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="menu-item-has-children">
+                                <a href="#" ng-if="!isCn">About us</a>
+                                <a href="#" ng-if="isCn">关于我们</a>
+                                <ul role="menu" class="sub-menu">
+                                    <li><a href="contact-au.html" ng-if="!isCn">Australian branch</a></li>
+                                    <li><a href="contact-au.html" ng-if="isCn">澳大利亚分支</a></li>
+                                    <li><a href="gallery.html" ng-if="!isCn">Gallery</a></li>
+                                    <li><a href="gallery.html" ng-if="isCn">实拍</a></li>
+                                    <li><a href="about-us.html" ng-if="!isCn">About us</a></li>
+                                    <li><a href="about-us.html" ng-if="isCn">关于我们</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div><!-- /.header__navigation -->
+
+                <div class="header__widgets my-icon-box">
+
+
+                    <div class="widget-icon-box">
+
+                        <div class="icon-box">
+                            <i class="fa fa-headphones"></i>
+                            <h4 class="icon-box__title" ng-if="!isCn">Call Us</h4>
+                            <h4 class="icon-box__title" ng-if="isCn">电话</h4>
+                            <span class="icon-box__subtitle">64 9 275 7646</span>
+                        </div>
+
+                    </div>
+
+                    <div class="widget-icon-box">
+
+                        <div class="icon-box">
+                            <i class="fa fa-location-arrow"></i>
+                            <h4 class="icon-box__title" ng-if="!isCn">Find us</h4>
+                            <h4 class="icon-box__title" ng-if="isCn">地址</h4>
+                            <span class="icon-box__subtitle">295 Landing Drive, Māngere, Auckland 2022</span>
+                        </div>
+
+                    </div>
+
+                    <div class="widget-icon-box">
+
+                        <div class="icon-box">
+                            <i class="fa fa-envelope-o"></i>
+                            <h4 class="icon-box__title" ng-if="!isCn">Email Us</h4>
+                            <h4 class="icon-box__title" ng-if="isCn">邮箱</h4>
+                            <a href="mailto:natasha@freightdirect.co.nz"><span class="icon-box__subtitle">natasha@freightdirect.co.nz</span></a>
+                        </div>
+
+                    </div>
+
+                    <div class="widget-icon-box my-home-flag pull-right">
+
+                        <div class="icon-box">
+                            <img src="cargopress/images/nz-flag.gif">
+                        </div>
+
+                    </div>
+
+                </div><!-- /.header__widgets -->
+
+
+            </header>
+
+        </div><!-- /.container -->
+
+    </div><!-- /.header_container -->
+    <script>
+        var qrId = '';
+
+        var activityId = '';
+
+        var categoryId = '';
+
+        var orderId = '';
+
+        var clientId = '';
+        clientId = '32';
+
+        var clientIdStr = '';
+        if (clientId) {
+            clientIdStr = '&clientId=' + clientId;
+        }
+
+        var keyword = '';
+
+        var footerId = '';
+
+        var hostUrl = '';
+        hostUrl = 'api.html';
+
+        var addressId = '';
+
+        var fxTheme = '';
+        fxTheme = 'cargopress';
+
+        var productId = '';
+    </script>
+
+    <!-- JUMBOTRON -->
+    <div class="jumbotron jumbotron--with-captions" ng-controller="cargoHomeController" ng-cloak>
+
+        <div data-interval="5000" data-ride="carousel" id="headerCarousel" class="carousel slide">
+
+            <div class="carousel-inner">
+
+                <div class="item">
+<!--                    <img alt="UNBEATABLE TRUCKING AND TRANSPORT SERVICES" sizes="100vw"-->
+<!--                         srcset="/cargopress/images/sliders/slider_1_1920.jpg 1920w, /cargopress/images/sliders/slider_1_425.jpg 425w"-->
+<!--                         src="cargopress/images/sliders/slider_1_1920.jpg">-->
+                    <img alt="UNBEATABLE TRUCKING AND TRANSPORT SERVICES" sizes="100vw"
+                         src="cargopress/images/sliders/slider_1_1920.jpg" style="opacity: 0.6;">
+                    <div class="container">
+                        <div class="jumbotron-content">
+                            <div class="jumbotron-content__title">
+                                <h1 ng-if="!isCn">UNBEATABLE TRUCKING AND TRANSPORT SERVICES</h1>
+                                <h1 ng-if="isCn">无懈可击的运输服务</h1>
+                            </div>
+                            <div class="jumbotron-content__description">
+                                <p class="p1">
+                                    <span class="s1" ng-if="!isCn">
+                                        Free up your time to grow your business AND get your products to your customers faster
+                                    </span>
+                                    <span class="s1" ng-if="isCn">
+                                        助你快速增长业务，拓展客户
+                                    </span>
+                                </p>
+                                <p>
+                                    <a target="_self" href="about-us.html" class="btn btn-primary" ng-if="!isCn">OUR
+                                        SERVICES</a>
+                                    <a target="_self" href="about-us.html" class="btn btn-primary"
+                                       ng-if="isCn">我们的服务</a>
+                                    &nbsp;
+                                    <a target="_self" href="contact.html" class="btn btn-secondary" ng-if="!isCn">GET IN
+                                        TOUCH</a>
+                                    <a target="_self" href="contact.html" class="btn btn-secondary"
+                                       ng-if="isCn">联系我们</a>
+                                </p>
+                                <div class="w69b-screencastify-mouse"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.item -->
+
+                <div class="item">
+                    <img alt="CRANE TO TRAIN, WE DO EVERYTHING" sizes="100vw"
+                         src="cargopress/images/sea-freight-service.jpg" style="opacity: 0.6;">
+                    <div class="container">
+                        <div class="jumbotron-content">
+                            <div class="jumbotron-content__title">
+                                <h1>Sea Freight Service, WE DO EVERYTHING</h1>
+                            </div>
+                            <div class="jumbotron-content__description">
+                                <p class="p1">
+                                    <span class="s1">Your One-Step Online Retail Third Party Logistics Specialist</span>
+                                </p>
+                                <a target="_self" href="about-us.html" class="btn btn-primary">READ MORE</a>
+                                <div class="w69b-screencastify-mouse"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.item -->
+
+                <div class="item">
+                    <img alt="CRANE TO TRAIN, WE DO EVERYTHING" sizes="100vw"
+                         src="cargopress/images/warehouse-service.jpg" style="opacity: 0.6;">
+                    <div class="container">
+                        <div class="jumbotron-content">
+                            <div class="jumbotron-content__title">
+                                <h1>Warehouse Storage</h1>
+                            </div>
+                            <div class="jumbotron-content__description">
+                                <p class="p1">
+                                    <span class="s1">Your One-Step Online Retail Third Party Logistics Specialist</span>
+                                </p>
+                                <a target="_self" href="about-us.html" class="btn btn-primary">READ MORE</a>
+                                <div class="w69b-screencastify-mouse"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.item -->
+
+                <div class="item">
+                    <img alt="CRANE TO TRAIN, WE DO EVERYTHING" sizes="100vw"
+                         src="cargopress/images/Customer-Bokerage.jpg" style="opacity: 0.6;">
+                    <div class="container">
+                        <div class="jumbotron-content">
+                            <div class="jumbotron-content__title">
+                                <h1>Customs Brokerage</h1>
+                            </div>
+                            <div class="jumbotron-content__description">
+                                <p class="p1">
+                                    <span class="s1">Your One-Step Online Retail Third Party Logistics Specialist</span>
+                                </p>
+                                <a target="_self" href="about-us.html" class="btn btn-primary">READ MORE</a>
+                                <div class="w69b-screencastify-mouse"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.item -->
+
+                <div class="item active">
+<!--                    <img alt="GROUND OR AIR, THERE IS NO STOPPING FOR US" sizes="100vw"-->
+<!--                         srcset="/cargopress/images/sliders/slider_3_1920.jpg 1920w, /cargopress/images/sliders/slider_3_425.jpg 425w"-->
+<!--                         src="cargopress/images/sliders/slider_3_1920.jpg">-->
+                    <img alt="GROUND OR AIR, THERE IS NO STOPPING FOR US" sizes="100vw"
+                         src="cargopress/images/sliders/slider_3_1920.jpg" style="opacity: 0.6;">
+                    <div class="container">
+                        <div class="jumbotron-content">
+                            <div class="jumbotron-content__title">
+                                <h1>GROUND OR AIR, THERE IS NO STOPPING FOR US</h1>
+                            </div>
+                            <div class="jumbotron-content__description">
+                                <p class="p1">
+                                    <span class="s1">Your Operations Partner for Warehousing & Fulfillment Services</span>
+                                </p>
+                                <a target="_self" href="about-us.html" class="btn btn-primary">MORE DETAILS</a>
+                                <div class="w69b-screencastify-mouse"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.item -->
+
+            </div><!-- /.carousel-inner -->
+
+            <div class="container">
+
+                <a data-slide="prev" role="button" href="#headerCarousel" class="left jumbotron__control">
+                    <i class="fa  fa-caret-left"></i>
+                </a>
+                <a data-slide="next" role="button" href="#headerCarousel" class="right jumbotron__control">
+                    <i class="fa  fa-caret-right"></i>
+                </a>
+            </div><!-- /.container -->
+
+        </div><!-- /.carousel -->
+
+    </div><!-- /.jumbotron -->
+
+    <!-- OUR SERVICES -->
+    <div class="container" ng-controller="cargoHomeController" role="main" ng-cloak>
+
+        <div class="row jumbotron-overlap first" style="margin-top: 50px">
+
+            <div class="col-sm-3">
+
+                <a>
+<!--                    <img alt="Cargo" class="post-image" sizes="(min-width: 781px) 360px, calc(100vw - 30px)"-->
+<!--                         srcset="/cargopress/images/services/service2.jpg 360w, /cargopress/images/services/service2.jpg 848w"-->
+<!--                         src="/cargopress/images/services/service2.jpg">-->
+                    <img src="cargopress/images/services/service2.jpg" height="148" width="262"/>
+                </a>
+
+                <h5 class="page-box__title" ng-if="!isCn">Air And Sea Freight</h5>
+
+                <p ng-if="!isCn">
+                    FCL, LCL and Breakbulk services
+
+                    Import and Export
+
+                    Competitive rates
+
+                    Worldwide consolidations
+
+                    Freight Direct specialize in the movement of new and used cars worldwide
+
+                    Freight Direct offer a brokerage service to cover all needs.
+
+                    This includes full customs formalities – duty refunds, drawbacks and tariff concessions
+
+                    Coastal and rail movement options for domestic cargo
+                </p>
+
+                <h5 class="page-box__title" ng-if="isCn">海运与空运服务</h5>
+
+                <p ng-if="isCn">
+                    捷航专注于大小货品，新旧车的进出口服务。我们提供各种清关服务以满足顾客进出口需求，包括办理海关手续
+                    ，退税，关税减免，铁路和海运等服务。
+                </p>
+
+            </div><!-- /.col -->
+
+            <div class="col-sm-3 my-home-service-content">
+
+                <a>
+<!--                    <img alt="Logistic Service" class="post-image" sizes="(min-width: 781px) 360px, calc(100vw - 30px)"-->
+<!--                         srcset="/cargopress/images/services/service1.jpg 360w, /cargopress/images/services/service1.jpg 848w"-->
+<!--                         src="/cargopress/images/services/service1.jpg">-->
+                    <img src="cargopress/images/services/service1.jpg" height="148" width="262"/>
+                </a>
+
+                <h5 class="page-box__title" ng-if="!isCn">Specialised Regions</h5>
+
+                <p ng-if="!isCn">
+                    Although we are a worldwide forwarder, we have particular expertise in the following:<br>
+
+                    * China <br>
+
+                    * Italy<br>
+
+                    * India<br>
+
+                    * Pakistan<br>
+
+                    * South East Asia<br>
+
+                    * Middle East<br>
+
+                    * Turkey<br>
+
+                    With a sophisticated network of cargo agents in these areas, and in-house expertise, we are able to
+                    offer a comprehensive service within these regions beyond the realm of most forwarders.
+                </p>
+
+                <h5 class="page-box__title" ng-if="isCn">特殊区域运营</h5>
+
+                <p ng-if="isCn">
+                    捷航不光是全球货运代理，经过十余年的耕耘，我们在一些国家和地区建立的广泛的联系，可以为顾客在当地搭建合作平台，地区
+                    包括： <br>
+
+                    * 中国 <br>
+
+                    * 意大利<br>
+
+                    * 印度<br>
+
+                    * 巴基斯坦<br>
+
+                    * 东南亚<br>
+
+                    * 中东<br>
+
+                    * 土耳其<br>
+                </p>
+
+
+            </div><!-- /.col -->
+
+            <div class="col-sm-3">
+
+                <a>
+<!--                    <img alt="Storage" class="post-image" sizes="(min-width: 781px) 360px, calc(100vw - 30px)"-->
+<!--                         srcset="/cargopress/images/services/service3.jpg 360w, /cargopress/images/services/service3.jpg 848w"-->
+<!--                         src="/cargopress/images/services/service3.jpg">-->
+                    <img src="cargopress/images/services/service3.jpg" height="148" width="262"/>
+                </a>
+
+                <h5 class="page-box__title" ng-if="!isCn">Additional Services</h5>
+
+                <p ng-if="!isCn">
+                    Project Cargo - We offer a comprehensive service for out of gauge project cargo. Specialising in
+                    heavy machinery and industrial equipment.
+                </p>
+                <p ng-if="!isCn">
+                    Warehousing & Logistics We also offer a complete door to door service for both import and export
+                    cargo. Storage is also available if required.
+
+                    Third Party Logistics - Freight Direct offer third party / triangle forwarding for sea/air shipments
+                    moving outside of New Zealand
+
+                    New/Used Cars - Freight Direct specialize in the movement of new and used cars worldwide
+                </p>
+
+                <h5 class="page-box__title" ng-if="isCn">项目物流</h5>
+
+                <p ng-if="isCn">
+                    捷航为项目货物提供全面服务，专业从事重型机械和工业设备。我们还为进出口货物提供完整的门到门服务。同时我们提供的第三
+                    方物流仓库业务 ，为在新西兰境外移动的电商卖家提供一条龙的海运/空运，清关，存储，派送业务。
+                </p>
+
+            </div><!-- /.col -->
+
+            <!-- TESTIMONIALS -->
+
+            <div class="col-sm-3">
+
+                <div class="featured-widget my-testimonial__carousel-h">
+
+                    <h5>
+                        <span ng-if="!isCn">Customer Testimonials</span>
+                        <span ng-if="isCn">用 户 评 论</span>
+                    </h5>
+
+                    <div class="testimonial__carousel">
+                        <a data-slide="prev" href="#testimonalCarousel"
+                           class="testimonial__carousel--left my-testimonial__carousel--left">
+                            <i aria-hidden="true" class="fa fa-caret-left"></i>
+                            <span role="button" class="sr-only">Next</span>
+                        </a>
+                        <a data-slide="next" href="#testimonalCarousel"
+                           class="testimonial__carousel--right my-testimonial__carousel--right">
+                            <i aria-hidden="true" class="fa fa-caret-right"></i>
+                            <span role="button" class="sr-only">Previous</span>
+                        </a>
+                    </div><!-- /.testimonial__carousel -->
+
+                    <div data-interval="5000" data-ride="carousel" class="carousel slide" id="testimonalCarousel">
+
+                        <div role="listbox" class="carousel-inner">
+
+                            <div class="item active">
+                                <div class="row">
+                                    <div class="col-xs-12  col-sm-12">
+                                        <p ng-if="!isCn">
+                                            I find it a pleasure doing business with the team at Freight Direct. You
+                                            get prompt, personalised service and freight solutions that are always
+                                            competitive and efficient. I would willingly recommend them to any
+                                            company seeking a professional, service-focussed freight partner
+                                        </p>
+
+                                        <p ng-if="isCn">
+                                            “我很高兴与捷航的团队开展业务。作为顾客，我们获得了效率，及时，个性化的服务和货运
+                                            解决方案。我愿意向任何寻求专业的货运代理商的客户推荐捷航物流仓库公司。“
+                                        </p>
+                                        <cite class="testimonial__author">
+                                            Patrick M<span class="testimonial__author-description">- Auckland</span>
+                                        </cite>
+                                    </div>
+                                </div>
+                            </div><!-- /.item -->
+
+                            <div class="item">
+                                <div class="row">
+                                    <div class="col-xs-12  col-sm-12">
+                                        <p ng-if="!isCn">
+                                            The fact that we are dealing with a director at the coal face leaves you
+                                            feeling you are in good hands, Competitive Pricings, a one stop shop for
+                                            all our international requirements. Recommended to everyone
+                                        </p>
+                                        <p ng-if="isCn">
+                                            “事实上，我们正在与一个事必躬亲的老板合作，这让我们感觉自己的业务得到妥善的安排，
+                                            捷航的价格和一站式服务是他们的亮点。满分好评。“
+                                        </p>
+                                        <cite class="testimonial__author">
+                                            Mike B<span class="testimonial__author-description">- Lower Hutt</span>
+                                        </cite>
+                                    </div>
+                                </div>
+                            </div><!-- /.item -->
+
+                            <div class="item">
+                                <div class="row">
+                                    <div class="col-xs-12  col-sm-12">
+                                        <p ng-if="!isCn">
+                                            Personal and accessible response team - enables swifter explanations of
+                                            situations at time and/or prior. Accurate delivery dates of products
+                                            makes us look good to our clients which is critical when working around
+                                            project supply and completion programs. This is also quite critical in
+                                            cash flow, as it helps us run leaner, yet smarter stocking. We can ring
+                                            anytime, and also we seem to be able to deal the same personal enabling
+                                            a level of understanding on our expectations and products helping
+                                            facilitate needs surrounding the service. Bigger companies clearly lack
+                                            this
+                                        </p>
+
+                                        <p ng-if="isCn">
+                                            “有一个个性化和高效的团队
+                                            ，捷航能够及时与我们更新进度。他们每一次按时完成工作，使我们倍感放心，这对于我们公
+                                            司完成计划至关重要。他们的价格也让我们满意。我们可以随时打电话给他们，他们高效的团
+                                            队和人性化的服务，有助于我们随时了解他们工作进度。较大的公司显然缺乏想捷航这样的高
+                                            效。“
+                                        </p>
+                                        <cite class="testimonial__author">
+                                            Larry H<span
+                                                class="testimonial__author-description">- Palmerston North</span>
+                                        </cite>
+                                    </div>
+                                </div>
+                            </div><!-- /.item --></div>
+                        <div role="listbox" class="carousel-inner">
+
+                            <div class="item">
+                                <div class="row">
+                                    <div class="col-xs-12  col-sm-12">
+                                        <p ng-if="!isCn">
+                                            In an industry where it is particularly difficult to differentiate from
+                                            competitors and find a unique point of difference Rahul Varma and the
+                                            team at Freight Direct do a very good job in focusing on understanding
+                                            their customers’ needs and providing close support. Freight Direct adds
+                                            value to our business by taking care of all our freight needs from the
+                                            time we place the order with the overseas manufacturer to the time the
+                                            container is landed in to one of our warehouses. This means that we can
+                                            concentrate on our core business of selling. Freight forwarding can be
+                                            frustrating at times if the customer is not in the know as to how
+                                            containers are tracking. Freight Direct are easily contactable and Rahul
+                                            will often make himself available outside of normal business hours to
+                                            help. Regular reporting on container movements by Freight Direct help us
+                                            keep up to date
+                                        </p>
+                                        <p ng-if="isCn">
+                                            “在一个特别难以与竞争对手区分并找到独特差异点的行业中，捷航团队在专注于了解客户需
+                                            求和提供紧密支持方面做得非常出色.从我们向海外制造商下订单到集装箱到达我们仓库的时
+                                            间，捷航负责处理所有货运需求。这意味着我们可以专注于我们的核心销售业务。Rail
+                                            Direct很容易联系，捷航的团队经常会在正常工作时间以外提供帮助，使使我们充分了解我
+                                            们货柜的情况 “
+                                        </p>
+                                        <cite class="testimonial__author">
+                                            Jed G<span
+                                                class="testimonial__author-description">- Palmerston North</span>
+                                        </cite>
+                                    </div>
+                                </div>
+                            </div><!-- /.item -->
+
+                            <div class="item">
+                                <div class="row">
+                                    <div class="col-xs-12  col-sm-12">
+                                        <p ng-if="!isCn">
+                                            Excellent level of personal service and understanding of our needs.
+                                            Freight Direct has always worked hard to get “inside our shoes” and help
+                                            us achieve. Freight Direct adds value to our company by ensuring that we
+                                            are always in contact and up to date with where our shipments are. As we
+                                            have grown they have enabled us to manage our imports more effectively
+                                            and smoothly. You provide us with regular reports on our shipments which
+                                            helps us to keep our customers informed and up to date with movements of
+                                            goods. They are also always ready to discuss ways to improve service and
+                                            to help us manage our imports costs which helps us to manage our “bottom
+                                            line” more closely. We would certainly recommend Freight Direct to
+                                            anyone who is looking for a progressive and forward looking
+                                            import/export agent
+                                        </p>
+                                        <p ng-if="isCn">
+                                            “出色的客户服务水平和精准的对顾客需求的把握，捷航一直努力帮助我们实现公司目标。
+                                            在
+                                            合作中，捷航及时沟通工作进度，努力为我们的公司创造利润。随着我们的公司的成长，捷航
+                                            帮助我们更高效管理我们的进口业务。我们向正在寻找进出口代理商的顾客郑重的推荐捷航物
+                                            流仓库公司。“
+                                        </p>
+                                        <cite class="testimonial__author">
+                                            Ken P<span class="testimonial__author-description">- Auckland</span>
+                                        </cite>
+                                    </div>
+                                </div>
+                            </div><!-- /.item -->
+
+                        </div><!-- /.carousel-inner -->
+
+                    </div><!-- /.carousel -->
+
+                </div><!-- /.testimonial -->
+
+            </div><!-- /.col -->
+
+            <!-- /.container -->
+
+        </div><!-- /.row -->
+
+
+        <div class="row">
+
+            <div class="col-sm-12">
+
+                <h3 class="widget-title big lined">
+                    <span ng-if="!isCn">OUR SERVICES</span>
+                    <span ng-if="isCn">公司服务项目</span>
+                </h3>
+
+            </div><!-- /.col -->
+
+        </div><!-- /.row -->
+
+        <div class="row">
+
+            <div class="col-sm-4">
+
+                <div class="widget_pw_icon_box margin-bottom-30">
+                    <a target="_self" class="icon-box" href="storage.html">
+                        <i class="fa fa-dropbox"></i>
+                        <h4 class="icon-box__title" ng-if="!isCn">PACKAGING AND STORAGE</h4>
+                        <h4 class="icon-box__title" ng-if="isCn">包装与存储</h4>
+                        <span class="icon-box__subtitle" ng-if="!isCn">We can package and store your things.</span>
+                        <span class="icon-box__subtitle" ng-if="isCn">我们可以包装并存储您的货物</span>
+                    </a>
+                </div><!-- /.widget_pw_icon_box -->
+
+                <div class="widget_pw_icon_box margin-bottom-30">
+                    <a target="_self" class="icon-box" href="warehousing.html">
+                        <i class="fa fa-archive"></i>
+                        <h4 class="icon-box__title" ng-if="!isCn">WAREHOUSING</h4>
+                        <h4 class="icon-box__title" ng-if="isCn">仓储业务</h4>
+                        <span class="icon-box__subtitle" ng-if="!isCn">We have top notch security and loads of space. Store your stuff at our warehouse.</span>
+                        <span class="icon-box__subtitle"
+                              ng-if="isCn">我们拥有一流的安全性和足够的空间。 将您的商品存放在我们的仓库。</span>
+                    </a>
+                </div><!-- /.widget_pw_icon_box -->
+
+            </div><!-- /.col -->
+
+            <div class="col-sm-4">
+
+                <div class="widget_pw_icon_box margin-bottom-30">
+                    <a target="_self" class="icon-box" href="cargo.html">
+                        <i class="fa fa-truck"></i>
+                        <h4 class="icon-box__title" ng-if="!isCn">CARGO</h4>
+                        <h4 class="icon-box__title" ng-if="isCn">运输</h4>
+                        <span class="icon-box__subtitle" ng-if="!isCn">Let us transport your things from point A to point B fast and securely. </span>
+                        <span class="icon-box__subtitle" ng-if="isCn">让我们快速安全地将您的东西从起点运送到终点。</span>
+                    </a>
+                </div><!-- /.widget_pw_icon_box -->
+
+                <div class="widget widget_pw_icon_box margin-bottom-30">
+                    <a target="_self" class="icon-box" href="logistic-service.html">
+                        <i class="fa fa-home"></i>
+                        <h4 class="icon-box__title" ng-if="!isCn">DOOR-TO-DOOR DELIVERY</h4>
+                        <h4 class="icon-box__title" ng-if="isCn">上门快递</h4>
+                        <span class="icon-box__subtitle" ng-if="!isCn">Do you need something delivered? We are what you are looking for! </span>
+                        <span class="icon-box__subtitle" ng-if="isCn">你需要运输什么吗？ 我们正在寻找你！</span>
+                    </a>
+                </div><!-- /.widget_pw_icon_box -->
+
+            </div><!-- /.col -->
+
+            <div class="col-sm-4">
+
+                <div class="widget_pw_icon_box margin-bottom-30">
+                    <a target="_self" class="icon-box" href="trucking-service.html">
+                        <i class="fa fa-globe"></i>
+                        <h4 class="icon-box__title" ng-if="!isCn">WORLDWIDE TRANSPORT</h4>
+                        <h4 class="icon-box__title" ng-if="isCn">世界范围运输</h4>
+                        <span class="icon-box__subtitle" ng-if="!isCn">We can transport your things anywhere in the world. </span>
+                        <span class="icon-box__subtitle" ng-if="isCn">我们可以将您的物品运送到世界任何地方。 </span>
+                    </a>
+                </div><!-- /.widget_pw_icon_box -->
+
+                <div class="widget_pw_icon_box margin-bottom-30">
+                    <a target="_self" class="icon-box" href="custom-clearance.html">
+                        <i class="fa fa-users"></i>
+                        <h4 class="icon-box__title" ng-if="!isCn">CUSTOMS CLEARANCE</h4>
+                        <h4 class="icon-box__title" ng-if="isCn">海关清算</h4>
+                        <span class="icon-box__subtitle" ng-if="!isCn">Freight Direct has an “in house” team of licensed customs brokers.</span>
+                        <span class="icon-box__subtitle"
+                              ng-if="isCn">Freight Direct拥有一支由持牌海关经纪人组成的“内部”团队。</span>
+                    </a>
+                </div><!-- /.widget_pw_icon_box -->
+
+            </div><!-- /.col -->
+
+        </div><!-- /.row -->
+
+    </div><!-- /.conainer -->
+
+    <!-- CTA -->
+    <div class="cta" style="background: #1f415d;" ng-controller="cargoHomeController" ng-cloak>
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-12">
+
+                    <div class="call-to-action">
+                        <div class="call-to-action__text" style="color: white;" ng-if="!isCn">
+                            Not sure which solution fits you business needs?
+                        </div>
+                        <div class="call-to-action__text" style="color: white;" ng-if="isCn">
+                            不确定哪种解决方案适合您的业务需求？
+                        </div>
+                        <div class="call-to-action__button">
+                            <a target="_blank" href="contact.html" class="btn btn-primary" ng-if="!isCn">CONTACT OUR
+                                SALES
+                                TEAM</a>
+                            <a target="_blank" href="contact.html" class="btn btn-primary"
+                               ng-if="isCn">联系我们的销售团队</a>
+                        </div>
+                    </div><!-- /.call-to-action -->
+
+                </div><!-- /.col -->
+
+            </div><!-- /.row -->
+
+        </div><!-- /.container -->
+
+    </div><!-- /.cta -->
+
+
+    <!-- VALUES -->
+    <div class="values margin-bottom-60" ng-controller="cargoHomeController" ng-cloak>
+
+        <div class="container">
+
+            <div class="col-sm-8 col-sm-offset-2">
+
+                <h3 ng-if="!isCn">Our Aim</h3>
+                <h3 ng-if="isCn">我们的目标</h3>
+                <hr class="hr-quote">
+                <p class="text-center" ng-if="!isCn">
+
+                    Our aim is to ensure that "you", our valuable customer, gets a "personal service" that meets your
+                    expectations every time. So why not give us a try - we guarantee you will see the difference. We
+                    will move your freight by road, rail, sea or air as you and your suppliers or customers require so
+                    it arrives where you want, when you want and at the price you expected.
+
+                    Warehousing Facility at our new location:
+
+                    "295 Landing Drive, Māngere, Auckland 2022"
+
+                    Our warehousing and 3PL segment extends additional logistics and distribution capabilities.
+
+                    We ensure your goods are handled and stored in an exceptionally impressive manner.
+
+                    integration capabilities allows quick data and information transfer. This allows you to focus on
+                    your core activities. We work to continually reduce your total Supply Chain Management costs and
+                    improve your business performance and competitiveness adding value to your business and creating
+                    efficiency. We do this through reducing inventory levels, shortening the Supply Chain, reducing
+                    product sourcing costs and increasing your ability to respond and service your customers.
+
+                    We would love to talk to you about our service and quote you some rates. Contact us today!
+                </p>
+
+                <p class="text-center" ng-if="isCn">
+
+                    我们的目标是确保我们的宝贵客户每次都能获得满足您期望的个性化服务。那么为什么不给我们一个机会，
+                    我们保证你会看到差异。我们将根据您和您的供应商或客户的要求，通过公路，铁路，海运或空运来运输您的货物，以便在您需要时以您想要的价格到达您想要的服务。我们的仓库位于“8
+                    Hautu
+                    Drive，Wiri，AUCKLAND”，现在我们扩展了额外的第三方电商物流和配送能力。我们确保以令人满意的方式处理和存储您的货物。我们的仓库管理系统允许您能快速传输库存数据和信息，这使您可以使您专注于您的核心活动。我们致力于不断降低您的供应链管理总成本，提高您的业务绩效和竞争力，为您的业务增加价值并提高效率。我们通过降低库存水平，缩短供应链，降低产品采购成本以及提高反馈速度和服务客户​​的能力来实现这一目标。我们很乐意与您讨论我们的服务，并为您报价。立即联系我们！
+                </p>
+
+            </div><!-- /.col -->
+
+        </div><!-- /.container -->
+
+    </div><!-- /.values -->
+
+    <!-- ABOUT / QUICK QUITE / GALLERY / FAQ -->
+    <div class="container" ng-controller="contactController" ng-cloak>
+
+        <div class="row margin-bottom-60">
+
+            <div class="col-sm-12" id="quickQuoteForm_wrapper">
+
+                <div class="featured-widget">
+
+                    <h3 class="widget-title" ng-if="!isCn">REQUEST A QUICK QUOTE</h3>
+                    <h3 class="widget-title" ng-if="isCn">请求快速帮助</h3>
+
+
+                    <form data-toggle="validator" ng-submit="processForm(userForm.$valid)" name="userForm" novalidate
+                          method="get">
+                        <div style="display:none"><input type="text" name="maximus" value=""></div>
+                        <input type="hidden" name="subject" value="CargoPress: Quick Quote Request">
+                        <div class="contact-form-small my-contact-form-small">
+                            <div class="row">
+                                <div class="col-xs-12  col-md-12">
+                                    <div class="form-group col-xs-12  col-md-3">
+                                        <input type="text"
+                                               placeholder="Name *"
+                                               aria-invalid="false"
+                                               aria-required="true"
+                                               size="40"
+                                               value=""
+                                               name="name"
+                                               ng-model="data.name"
+                                               required ng-if="!isCn">
+                                        <input type="text"
+                                               placeholder="姓名 *"
+                                               aria-invalid="false"
+                                               aria-required="true"
+                                               size="40"
+                                               value=""
+                                               name="name"
+                                               ng-model="data.name"
+                                               required ng-if="isCn">
+                                        <div class="help-block"
+                                             ng-messages="userForm.name.$error"
+                                             ng-show="userForm.name.$touched">
+                                            <p ng-messages-include="js/app/templates/messages.html"></p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-xs-12  col-md-3">
+                                        <input type="email"
+                                               placeholder="E-mail address"
+                                               aria-invalid="false"
+                                               aria-required="true"
+                                               size="40"
+                                               value=""
+                                               name="email"
+                                               ng-model="data.email"
+                                               required ng-if="!isCn">
+                                        <input type="email"
+                                               placeholder="邮箱"
+                                               aria-invalid="false"
+                                               aria-required="true"
+                                               size="40"
+                                               value=""
+                                               name="email"
+                                               ng-model="data.email"
+                                               required ng-if="isCn">
+                                        <div class="help-block"
+                                             ng-messages="userForm.email.$error"
+                                             ng-show="userForm.email.$touched">
+                                            <p ng-messages-include="js/app/templates/messages.html"></p>
+                                        </div>
+                                    </div>
+                                    <select aria-invalid="false" name="service" class="col-xs-12  col-md-3">
+                                        <option value="Cargo" ng-if="!isCn">Cargo</option>
+                                        <option value="Cargo" ng-if="isCn">船运业务</option>
+                                        <option value="Ground Transport" ng-if="!isCn">Ground Transport</option>
+                                        <option value="Ground Transport" ng-if="isCn">地面运输</option>
+                                        <option value="Logistic Service" ng-if="!isCn">Logistic Service</option>
+                                        <option value="Logistic Service" ng-if="isCn">物流服务</option>
+                                        <option value="Storage" ng-if="!isCn">Storage</option>
+                                        <option value="Storage" ng-if="isCn">第三方电商仓储</option>
+                                        <option value="Trucking Service" ng-if="!isCn">Trucking Service</option>
+                                        <option value="Trucking Service" ng-if="isCn">货运服务</option>
+                                        <option value="Warehousing" ng-if="!isCn">Warehousing</option>
+                                        <option value="Warehousing" ng-if="isCn">仓储业务</option>
+                                    </select>
+                                    <div class="form-group col-xs-12  col-md-3">
+                                        <input type="text" placeholder="Subject *" aria-invalid="false"
+                                               aria-required="true" size="40" value="" name="subject" ng-if="!isCn">
+                                        <input type="text" placeholder="类型 *" aria-invalid="false"
+                                               aria-required="true" size="40" value="" name="subject" ng-if="isCn">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12  col-md-12">
+                                    <div class="form-group col-xs-12  col-md-9 my-form-group">
+                                        <textarea placeholder="Message *"
+                                                  aria-invalid="false"
+                                                  rows="10"
+                                                  cols="40"
+                                                  ng-model="data.comments"
+                                                  name="comments"
+                                                  required
+                                                  id="comments"
+                                                  ng-if="!isCn">
+                                        </textarea>
+                                        <textarea placeholder="信息 *"
+                                                  aria-invalid="false"
+                                                  rows="10"
+                                                  cols="40"
+                                                  ng-model="data.comments"
+                                                  name="comments"
+                                                  required
+                                                  id="comments"
+                                                  ng-if="isCn">
+                                        </textarea>
+                                        <div class="help-block"
+                                             ng-messages="userForm.comments.$error"
+                                             ng-show="userForm.comments.$touched">
+                                            <p ng-messages-include="js/app/templates/messages.html"></p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-xs-12  col-md-3">
+                                        <input type="submit" class="btn btn-primary pull-right" value="SEND MESSAGE"
+                                               ng-if="!isCn">
+                                        <input type="submit" class="btn btn-primary pull-right" value="发送信息"
+                                               ng-if="isCn">
+                                        <img class="ajax-loader" id="loader" src="cargopress/images/ajax-loader.gif"
+                                             alt="Sending ..." style="display:none;">
+                                    </div>
+                                </div>
+                            </div><!-- /.row -->
+                            <div class="response success" ng-if="!isCn">Your message was sent; we'll be in touch
+                                shortly!
+                            </div>
+                            <div class="response success" ng-if="isCn">你的留言已发送; 我们很快与您联系！
+                            </div>
+                            <div class="response error" ng-if="!isCn">Unfortunately, we could not send your message
+                                right now. Please
+                                try again.
+                            </div>
+                            <div class="response error" ng-if="isCn">很遗憾，我们现在无法发送您的消息。请再试一次。</div>
+                        </div><!-- /.contact-form-small -->
+                    </form>
+
+                </div><!-- /.featured-widget -->
+
+            </div><!-- /.col -->
+
+        </div><!-- /.row -->
+
+        <div class="row margin-bottom-60" ng-if="false">
+
+            <div class="col-sm-6">
+
+                <div class="widget_black-studio-tinymce">
+
+                    <h3 class="widget-title lined big">
+                        <span>FLEET GALLERY</span>
+                    </h3>
+
+                    <div class="gallery gallery-columns-3 gallery-size-medium">
+                        <figure class="gallery-item">
+                            <a href="cargopress/images/placeholders/848x480.png">
+                                <img alt="placeholder" src="cargopress/images/placeholders/300x170.png">
+                            </a>
+                        </figure>
+                        <figure class="gallery-item">
+                            <a href="cargopress/images/placeholders/848x480.png">
+                                <img alt="placeholder" src="cargopress/images/placeholders/300x170.png">
+                            </a>
+                        </figure>
+                        <figure class="gallery-item">
+                            <a href="cargopress/images/placeholders/848x480.png">
+                                <img alt="placeholder" src="cargopress/images/placeholders/300x170.png">
+                            </a>
+                        </figure>
+                        <figure class="gallery-item">
+                            <a href="cargopress/images/placeholders/848x480.png">
+                                <img alt="placeholder" src="cargopress/images/placeholders/300x170.png">
+                            </a>
+                        </figure>
+                        <figure class="gallery-item">
+                            <a href="cargopress/images/placeholders/848x480.png">
+                                <img alt="placeholder" src="cargopress/images/placeholders/300x170.png">
+                            </a>
+                        </figure>
+                        <figure class="gallery-item">
+                            <a href="cargopress/images/placeholders/848x480.png">
+                                <img alt="placeholder" src="cargopress/images/placeholders/300x170.png">
+                            </a>
+                        </figure>
+                    </div><!-- /.gallery -->
+
+                </div><!-- /.widget_black-studio-tinymce -->
+
+            </div><!-- /.col -->
+
+            <div class="col-sm-6">
+
+                <h3 class="widget-title lined big">
+                    <span>FAQ</span>
+                </h3>
+                <h4>
+                    <a target="_blank" href="faq.html" class="dark-link">HOW MANY TIMES DO I HAVE TO TELL YOU A FEW
+                        DIFFERENT WAYS?</a>
+                </h4>
+                <hr>
+                <h4>
+                    <a target="_blank" href="faq.html" class="dark-link">WHAT IS DO I HAVE TO TELL YOU A FEW LOREM?</a>
+                </h4>
+                <hr>
+                <h4>
+                    <a target="_blank" href="faq.html" class="dark-link">HOW MANY DO I HAVE TO TELL YOU HAVE A?</a>
+                </h4>
+                <hr>
+                <p>
+                    <a href="faq.html" class="read-more">MORE QUESTIONS</a>
+                </p>
+
+            </div><!-- /.col -->
+
+        </div><!-- /.row -->
+
+    </div><!-- /.container -->
+
+    <!-- TESTIMONIALS -->
+    <div class="testimonials" ng-controller="cargoHomeController" ng-if="false" ng-cloak>
+
+        <div class="container">
+
+            <div class="row margin-bottom-60">
+
+                <div class="col-sm-12">
+
+                    <div class="testimonial">
+
+                        <h3 class="widget-title lined big">
+                            <span ng-if="!isCn">TESTIMONIALS</span>
+                            <span ng-if="isCn">评论</span>
+                        </h3>
+
+                        <div class="testimonial__carousel">
+                            <a data-slide="prev" href="#testimonalCarousel" class="testimonial__carousel--left">
+                                <i aria-hidden="true" class="fa fa-caret-left"></i>
+                                <span role="button" class="sr-only" ng-if="!isCn">Next</span>
+                                <span role="button" class="sr-only" ng-if="isCn">下一个</span>
+                            </a>
+                            <a data-slide="next" href="#testimonalCarousel" class="testimonial__carousel--right">
+                                <i aria-hidden="true" class="fa fa-caret-right"></i>
+                                <span role="button" class="sr-only" ng-if="!isCn">Previous</span>
+                                <span role="button" class="sr-only" ng-if="isCn">上一个</span>
+                            </a>
+                        </div><!-- /.testimonial__carousel -->
+
+                        <div data-interval="false" data-ride="carousel" class="carousel slide" id="testimonalCarousel">
+
+                            <div role="listbox" class="carousel-inner">
+
+                                <div class="item">
+                                    <div class="row">
+                                        <div class="col-xs-12  col-sm-6">
+                                            <blockquote>
+                                                <p class="testimonial__quote">
+                                                    Excellent level of personal service and understanding of our needs.
+                                                    Freight Direct has always worked hard to get “inside our shoes” and
+                                                    help us achieve.
+                                                    Freight Direct adds value to our company by ensuring that we are
+                                                    always in contact and up to date with where our shipments are.
+                                                    As we have grown they have enabled us to manage our imports more
+                                                    effectively and smoothly.
+                                                </p>
+                                                <cite class="testimonial__author">
+                                                    Frank Martin<span class="testimonial__author-description">, Transporter&nbsp;&nbsp;May 22, 2015 at 6:42 am</span>
+                                                </cite>
+                                            </blockquote>
+                                        </div>
+                                        <div class="col-xs-12  col-sm-6">
+                                            <blockquote>
+                                                <p class="testimonial__quote">
+                                                    Excellent level of personal service and understanding of our needs.
+                                                    Freight Direct has always worked hard to get “inside our shoes” and
+                                                    help us achieve.
+                                                    Freight Direct adds value to our company by ensuring that we are
+                                                    always in contact and up to date with where our shipments are.
+                                                    As we have grown they have enabled us to manage our imports more
+                                                    effectively and smoothly.
+                                                </p>
+                                                <cite class="testimonial__author">
+                                                    Martin Frank<span class="testimonial__author-description">, Transporter&nbsp;&nbsp;May 22, 2015 at 6:42 am </span>
+                                                </cite>
+                                            </blockquote>
+                                        </div>
+                                    </div>
+                                </div><!-- /.item -->
+
+                                <div class="item active">
+                                    <div class="row">
+                                        <div class="col-xs-12  col-sm-6">
+                                            <blockquote>
+                                                <p class="testimonial__quote">
+                                                    Excellent level of personal service and understanding of our needs.
+                                                    Freight Direct has always worked hard to get “inside our shoes” and
+                                                    help us achieve.
+                                                    Freight Direct adds value to our company by ensuring that we are
+                                                    always in contact and up to date with where our shipments are.
+                                                    As we have grown they have enabled us to manage our imports more
+                                                    effectively and smoothly.
+                                                </p>
+                                                <cite class="testimonial__author">
+                                                    Frank Martin<span class="testimonial__author-description">, Transporter&nbsp;&nbsp;May 22, 2015 at 6:42 am</span>
+                                                </cite>
+                                            </blockquote>
+                                        </div>
+                                        <div class="col-xs-12  col-sm-6">
+                                            <blockquote>
+                                                <p class="testimonial__quote">
+                                                    Excellent level of personal service and understanding of our needs.
+                                                    Freight Direct has always worked hard to get “inside our shoes” and
+                                                    help us achieve.
+                                                    Freight Direct adds value to our company by ensuring that we are
+                                                    always in contact and up to date with where our shipments are.
+                                                    As we have grown they have enabled us to manage our imports more
+                                                    effectively and smoothly.
+                                                </p>
+                                                <cite class="testimonial__author">
+                                                    Martin Frank<span class="testimonial__author-description">, Transporter&nbsp;&nbsp;May 22, 2015 at 6:42 am</span>
+                                                </cite>
+                                            </blockquote>
+                                        </div>
+                                    </div>
+                                </div><!-- /.item -->
+
+                            </div><!-- /.carousel-inner -->
+
+                        </div><!-- /.carousel -->
+
+                    </div><!-- /.testimonial -->
+
+                </div><!-- /.col -->
+
+            </div><!-- /.row -->
+
+        </div><!-- /.container -->
+
+    </div><!-- /.testimonials -->
+
+    <!-- MAP 地图-->
+    <div class="map margin-bottom-60" ng-cloak>
+
+
+        <div style="width: 100%">
+            <div style="width: 100%"><iframe width="100%" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=295%20Landing%20Drive,%20M%C4%81ngere,%20Auckland%202022+(295%20Landing%20Drive,%20M%C4%81ngere,%20Auckland%202022)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.maps.ie/population/">Population mapping</a></iframe></div>
+        </div>
+        <br/>
+
+    </div><!-- /.map -->
+
+    <!-- OUR PARTNERS -->
+    <div class="container my-home-partners" ng-controller="cargoHomeController" ng-cloak>
+
+        <div class="row margin-bottom-60">
+
+            <div class="col-sm-12">
+
+                <div class="widget_text">
+
+                    <p>
+                        <span ng-if="!isCn">Freight Direct is proud member of CBAFF and Project Network Cargo</span>
+                        <span ng-if="isCn">Freight Direct是CBAFF和Project Network Cargo的成员</span>
+                    </p>
+                    <div class="logo-panel">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a href="http://www.cbaff.org.nz/">
+                                    <img alt="Client" src="cargopress/images/member-1.jpg">
+                                </a>
+                            </div>
+                            <div class="col-sm-6">
+                                <a href="https://www.projectcargonetwork.com/">
+                                    <img alt="Client" src="cargopress/images/member-2.png">
+                                </a>
+                            </div>
+                        </div><!-- /.row -->
+                    </div><!-- /.logo-panel -->
+
+                </div><!-- /.widget_text -->
+
+            </div><!-- /.col -->
+
+        </div><!-- /.row -->
+
+    </div><!-- /.container -->
+
+
+    <!-- FOOTER -->
+    <footer class="footer" ng-controller="footerController" ng-cloak>
+
+        <div class="footer-top">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col-xs-12 col-md-4 my-footer-logo-area">
+
+                        <p class="my-footer-logo-text">
+                            <img alt="logo-footer" src="cargopress/images/FD-footer-logo.png" class="logo">
+                        </p>
+                        <p>
+                            We operate in logistics services, freight forwarding services, warehouseing which is our
+                            business....yet, customers are our engine.
+                        </p>
+                        <p ng-if="false">
+                            <a target="_blank" href="https://www.facebook.com/ProteusThemes"
+                               class="icon-container icon-container--square">
+                                <span class="fa fa-facebook"></span>
+                            </a>
+                            <a target="_blank" href="https://twitter.com/ProteusThemes"
+                               class="icon-container icon-container--square">
+                                <span class="fa fa-linkedin"></span>
+                            </a>
+                            <a target="_blank" href="http://themeforest.net/user/ProteusThemes/portfolio"
+                               class="icon-container icon-container--square">
+                                <span class="fa fa-google-plus"></span>
+                            </a>
+                        </p>
+
+                    </div><!-- /.row -->
+
+                    <div class="col-xs-12 col-md-2">
+
+                        <div class="widget_nav_menu">
+                            <h6 class="footer-top__headings" ng-if="!isCn">NAVIGATION</h6>
+                            <h6 class="footer-top__headings" ng-if="isCn">导航</h6>
+                            <ul>
+                                <li><a href="news.html" ng-if="!isCn">NEWS</a></li>
+                                <li><a href="news.html" ng-if="isCn">新闻</a></li>
+                                <li><a href="contact-au.html" ng-if="!isCn">AUSTRALIAN BRANCH</a></li>
+                                <li><a href="contact-au.html" ng-if="isCn">澳大利亚分支</a></li>
+                                <li><a href="gallery.html" ng-if="!isCn">GALLERY</a></li>
+                                <li><a href="gallery.html" ng-if="isCn">实拍</a></li>
+                                <li><a href="about-us.html" ng-if="!isCn">ABOUT US</a></li>
+                                <li><a href="about-us.html" ng-if="isCn">关于我们</a></li>
+                            </ul>
+                        </div><!-- /.widget_nav_menu -->
+
+                    </div><!-- /.row -->
+
+                    <div class="col-xs-12 col-md-2">
+
+                        <div class="widget_nav_menu">
+
+                            <h6 class="footer-top__headings" ng-if="!isCn">OUR SERVICES</h6>
+                            <h6 class="footer-top__headings" ng-if="isCn">我们的服务</h6>
+                            <ul>
+                                <li><a href="cargo.html" ng-if="!isCn">CARGO</a></li>
+                                <li><a href="cargo.html" ng-if="isCn">船运业务</a></li>
+                                <li><a href="warehousing.html" ng-if="!isCn">WAREHOUSING</a></li>
+                                <li><a href="warehousing.html" ng-if="isCn">仓储业务</a></li>
+                                <li><a href="logistics-service.html" ng-if="!isCn">LOGISTICS SERVICE</a></li>
+                                <li><a href="logistics-service.html" ng-if="isCn">物流服务</a></li>
+                                <li><a href="trucking-service.html" ng-if="!isCn">TRUCKING SERVICE</a></li>
+                                <li><a href="trucking-service.html" ng-if="isCn">运输服务</a></li>
+                                <li><a href="storage.html" ng-if="!isCn">STORAGE</a></li>
+                                <li><a href="storage.html" ng-if="isCn">第三方电商仓储</a></li>
+                                <li><a href="custom-clearance.html" ng-if="!isCn">CUSTOMS CLEARANCE</a></li>
+                                <li><a href="custom-clearance.html" ng-if="isCn">海关清算</a></li>
+                            </ul>
+
+                        </div><!-- /.widget_nav_menu -->
+
+                    </div><!-- /.row -->
+
+                    <div class="col-xs-12 col-md-2">
+
+                        <div class="widget_nav_menu">
+
+                            <h6 class="footer-top__headings" ng-if="!isCn">PARTNER LINKS</h6>
+                            <h6 class="footer-top__headings" ng-if="isCn">合作公司链接</h6>
+                            <ul>
+                                <li><a href="seafreight-links.html" ng-if="!isCn">SEAFREIGHT LINKS</a></li>
+                                <li><a href="shipping-lines.html" ng-if="!isCn">SHIPPING LINES</a></li>
+                                <li><a href="port-links.html" ng-if="!isCn">PORT LINKS</a></li>
+                                <li><a href="courier-tracking-link.html" ng-if="!isCn">COURIER TRACKING LINK</a></li>
+                                <li><a href="documents.html" ng-if="!isCn">DOCUMENTS</a></li>
+                                <li><a href="seafreight-links.html" ng-if="isCn">海洋货运链接</a></li>
+                                <li><a href="shipping-lines.html" ng-if="isCn">海运线路</a></li>
+                                <li><a href="port-links.html" ng-if="isCn">港口链接</a></li>
+                                <li><a href="courier-tracking-link.html" ng-if="isCn">物流追踪链接</a></li>
+                                <li><a href="documents.html" ng-if="isCn">文档</a></li>
+
+                            </ul>
+
+                        </div><!-- /.widget_nav_menu -->
+
+                    </div><!-- /.row -->
+
+                    <div class="col-xs-12 col-md-2">
+
+                        <h6 class="footer-top__headings" ng-if="!isCn">Contact us</h6>
+                        <h6 class="footer-top__headings" ng-if="isCn">联系我们</h6>
+                        <p ng-if="!isCn">
+                            We would love to talk to you about our service and quote you some rates. Contact us today!
+                        </p>
+                        <p ng-if="isCn">
+                            我们很乐意与您讨论我们的服务，并为您报价。 立即联系我们！
+                        </p>
+                        <p>
+                            <a href="contact.html" class="btn btn-info" ng-if="!isCn">Contact Now</a>
+                            <a href="contact.html" class="btn btn-info" ng-if="isCn">立刻联系</a>
+                        </p>
+
+                    </div><!-- /.row -->
+
+                </div><!-- /.row -->
+
+            </div><!-- /.footer -->
+
+        </div><!-- /.footer-top -->
+
+        <div class="footer-bottom">
+            <div class="container">
+                <div ng-if="!isCn">Copyright © 2018 Freight Direct . All Rights Reserved.</div>
+                <div ng-if="isCn">版权所有©2018 Freight Direct。 版权所有。</div>
+            </div><!-- /.container -->
+        </div><!-- /.footer-bottom -->
+    </footer>
+</div><!-- /.boxed-container -->
+
+<script src="cargopress/js/jquery-2.1.4.min.js" type="text/javascript"></script>
+<script src="cargopress/js/bootstrap/carousel.js"></script>
+<script src="cargopress/js/bootstrap/transition.js"></script>
+<script src="cargopress/js/bootstrap/button.js"></script>
+<script src="cargopress/js/bootstrap/collapse.js"></script>
+<script src="cargopress/js/bootstrap/validator.js"></script>
+<script src="cargopress/js/underscore.js"></script>
+<script src="cargopress/js/NumberCounter.js"></script>
+<script src="cargopress/js/jquery.magnific-popup.min.js"></script>
+<script src="cargopress/js/custom.js"></script>
+<script src="https://maps.google.com/maps/api/js?sensor=false"></script>
+<script src="cargopress/js/SimpleMap.js"></script>
+<script src="cargopress/js/custom.js"></script>
+
+
+<!-- _________ angular js lib__________ -->
+<script src="js/app-libs/angular/angular.min.js"></script>
+<script src="js/app-libs/angular-busy-tracker/busy.min.js"></script>
+<script src="js/app-libs/spin.js/spin.min.js"></script>
+<script src="js/app-libs/angular-spinner/angular-spinner.min.js"></script>
+<script src="js/app-libs/ng-dialog/js/ngDialog.min.js"></script>
+<script src="js/app-libs/bootbox-js/bootbox.min.js"></script>
+<script src="js/app-libs/angular-messages/angular-messages.min.js"></script>
+<script src="js/app-libs/angular-resource/angular-resource.min.js"></script>
+
+<script src="js/app-libs/highcharts-ng/highstock.src.js"></script>
+<script src="js/app-libs/highcharts-ng/highcharts-ng.min.js"></script>
+<script src="js/app-libs/angular-wizard/dist/angular-wizard.min.js"></script>
+<script src="js/app-libs/dropzone/min/dropzone.min.js"></script>
+<script src="js/app-libs/ng-dropzone/dist/ng-dropzone.min.js"></script>
+
+<script src="js/app-libs/moment/moment.min.js"></script>
+<script src="js/app-libs/moment-timezone/moment-timezone-with-data.min.js"></script>
+<script src="js/app-libs/angular-datepicker/angular-datepicker.min.js"></script>
+<script src="js/app-libs/ng-toast/ngToast.min.js"></script>
+<script src="js/app-libs/angular-animate.min.js"></script>
+<script src="js/app-libs/angular-sanitize.min.js"></script>
+<script src="js/app-libs/angular-utils-pagination/dirPagination.js"></script>
+<script type="text/javascript" src="js/app-libs/lodash.min.js"></script>
+<!-- _________ angular js app -->
+<script src="js/app/app.js"></script>
+<script src="js/app/app-constant.js"></script>
+<script src="js/app/controllers/home.controller.js"></script>
+<script src="js/app/cargoexpress-controllers/cargo-home.controller.js"></script>
+<script src="js/app/controllers/products.controller.js"></script>
+<script src="js/app/controllers/faq.controller.js"></script>
+<script src="js/app/controllers/login.controller.js"></script>
+<script src="js/app/controllers/cart.controller.js"></script>
+<script src="js/app/controllers/order.controller.js"></script>
+<script src="js/app/controllers/order-detail.controller.js"></script>
+<script src="js/app/controllers/checkout.controller.js"></script>
+<script src="js/app/controllers/category.controller.js"></script>
+<script src="js/app/controllers/header.controller.js"></script>
+<script src="js/app/cargoexpress-controllers/cargo-header.controller.js"></script>
+<script src="js/app/controllers/register.controller.js"></script>
+<script src="js/app/controllers/footer.controller.js"></script>
+<script src="js/app/controllers/detail.controller.js"></script>
+<script src="js/app/controllers/address.controller.js"></script>
+<script src="js/app/controllers/dashboard.controller.js"></script>
+<script src="js/app/controllers/coin.controller.js"></script>
+<script src="js/app/controllers/add-address.controller.js"></script>
+<script src="js/app/controllers/account.controller.js"></script>
+<script src="js/app/controllers/coin-activity.controller.js"></script>
+<script src="js/app/controllers/find-password.controller.js"></script>
+<script src="js/app/controllers/contact.controller.js"></script>
+<script src="js/app/bege-controllers/bege-checkout.controller.js"></script>
+<script src="js/app/controllers/edit-address.controller.js"></script>
+<script src="js/app/controllers/website-news.controller.js"></script>
+
+
+<script src="js/app/services/account.service.js"></script>
+<script src="js/app/services/auth.service.js"></script>
+<script src="js/app/services/home.service.js"></script>
+<script src="js/app/services/order.service.js"></script>
+<script src="js/app/services/resources.service.js"></script>
+
+<script src="js/app/services/address.service.js"></script>
+<script src="js/app/services/app-user.service.js"></script>
+<script src="js/app/services/availability.service.js"></script>
+<script src="js/app/services/balance.service.js"></script>
+<script src="js/app/services/balance-detail.service.js"></script>
+<script src="js/app/services/cart.service.js"></script>
+<script src="js/app/services/cart-item.service.js"></script>
+<script src="js/app/services/category.service.js"></script>
+<script src="js/app/services/coin-activity.service.js"></script>
+<script src="js/app/services/coin-history.service.js"></script>
+<script src="js/app/services/content.service.js"></script>
+<script src="js/app/services/country.service.js"></script>
+<script src="js/app/services/coupon.service.js"></script>
+<script src="js/app/services/currency.service.js"></script>
+<script src="js/app/services/experience.service.js"></script>
+<script src="js/app/services/faq.service.js"></script>
+<script src="js/app/services/favorite.service.js"></script>
+<script src="js/app/services/feature-type.service.js"></script>
+<script src="js/app/services/feedback.service.js"></script>
+<script src="js/app/services/feedback-type.service.js"></script>
+<script src="js/app/services/footer.service.js"></script>
+<script src="js/app/services/gateway.service.js"></script>
+<script src="js/app/services/guest-requirement.service.js"></script>
+<script src="js/app/services/home-page-slider.service.js"></script>
+<script src="js/app/services/inventory-detail.service.js"></script>
+<script src="js/app/services/invitation.service.js"></script>
+<script src="js/app/services/language.service.js"></script>
+<script src="js/app/services/member-group.service.js"></script>
+<script src="js/app/services/product-multi.service.js"></script>
+<script src="js/app/services/product-single.service.js"></script>
+<script src="js/app/services/registration-answer.service.js"></script>
+<script src="js/app/services/registration-question.service.js"></script>
+<script src="js/app/services/registration-question-option.service.js"></script>
+<script src="js/app/services/shipment.service.js"></script>
+<script src="js/app/services/shipment-detail.service.js"></script>
+<script src="js/app/services/shipment-fee.service.js"></script>
+<script src="js/app/services/social-link.service.js"></script>
+<script src="js/app/services/tag.service.js"></script>
+<script src="js/app/services/term-condition.service.js"></script>
+<script src="js/app/services/transaction-single.service.js"></script>
+<script src="js/app/services/transaction-single-item.service.js"></script>
+<script src="js/app/services/website-column.service.js"></script>
+<script src="js/app/services/my.service.js"></script>
+<script src="js/app/services/profile.service.js"></script>
+<script src="js/app/services/website-news.service.js"></script>
+<script src="js/app/services/attribute.service.js"></script>
+
+
+<script src="js/app/directives/file-dropzone.directive.js"></script>
+<script src="js/app/directives/compare-password.directive.js"></script>
+<script src="js/app/directives/compare-to.directive.js"></script>
+<script src="js/app/directives/complex-password.directive.js"></script>
+<script src="js/app/directives/valid-email.directive.js"></script>
+
+</body>
+
+<!-- Mirrored from www.freightdirect.co.nz/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 06 Sep 2021 11:32:43 GMT -->
+</html>

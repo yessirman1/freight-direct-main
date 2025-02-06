@@ -1,0 +1,738 @@
+
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+
+<!-- Mirrored from www.freightdirect.co.nz/courier-tracking-link by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 06 Sep 2021 11:32:59 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="1oEzyHnzBhoQ8ivo4thoFprobwiLeAaBspdSivFufTw" />
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Freight Direct</title>
+
+    <!-- Styling -->
+    <link href="cargopress/css/custom.css" rel="stylesheet">
+    <link href="cargopress/css/style.css" rel="stylesheet">
+    <link href="cargopress/css/magnific-popup.css" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Roboto%3A400%2C700%7CSource+Sans+Pro%3A700%2C900&amp;subset=latin" rel="stylesheet">
+    <link rel="shortcut icon" href="cargopress/images/favicon-32x32.png">
+
+    <script src="cargopress/js/modernizr.custom.24530.js" type="text/javascript"></script>
+
+<!-- angular plugin css -->
+    <link href="js/app-libs/please-wait/please-wait.css" rel="stylesheet"/>
+    <link href="js/app-libs/SpinKit/css/spinkit.css" rel="stylesheet"/>
+    <link href="js/app-libs/angular-busy-tracker/busy.min.css" rel="stylesheet"/>
+    <link href="js/app-libs/ng-dialog/css/ngDialog.min.css" rel="stylesheet"/>
+    <link href="js/app-libs/ng-dialog/css/ngDialog-theme-default.min.css" rel="stylesheet"/>
+    <link href="js/app-libs/highcharts-ng/highcharts-ng.css" rel="stylesheet"/>
+    <link href="js/app-libs/angular-wizard/dist/angular-wizard.min.css" rel="stylesheet"/>
+    <link href="js/app-libs/dropzone/min/dropzone.min.css" rel="stylesheet"/>
+    <link href="js/app-libs/ng-dropzone/dist/ng-dropzone.css" rel="stylesheet"/>
+    <link href="js/app-libs/angular-datepicker/angular-datepicker.css" rel="stylesheet"/>
+    <link href="js/app-libs/ng-toast/ngToast.min.css" rel="stylesheet"/>
+    <link href="js/app-libs/ng-toast/ngToast-animations.min.css" rel="stylesheet"/>
+    <!-- Fixing Internet Explorer ______________________________________-->
+
+ <style type="text/css">
+     [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+         display: none !important;
+     }
+ </style>
+<script type="text/ng-template" id="needLoginTemplate">
+    <div class="theme_title_center align_center">
+        <br>
+        <h3>请先登陆</h3>
+        <span></span>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right service_page_main_post align_center">
+            <div class="wrapper" style="text-align: center">
+                <p>您需要先登陆才能进行下一步操作</p>
+                            <br>
+                <br>
+                <a href="/signin" class="btn-upper btn btn-primary checkout-page-button">
+                    去登陆
+                </a>
+            </div>
+        </div>
+    </div>
+</script>
+
+
+<script type="text/ng-template" id="registerFormTemplate">
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right service_page_main_post align_center">
+            <div class="wrapper" style="text-align: center">
+                <span class="slider-subtitle5 black-text no-margin-bottom">Modal dialog</span>
+                <p class="margin-four">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                    Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                <br>
+                <br>
+                <a class="highlight-button btn btn-very-small button popup-modal-dismiss no-margin" href="#">Dismiss</a>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="payDialogModal">
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right service_page_main_post align_center">
+            <div class="wrapper" style="text-align: center">
+                <span class="slider-subtitle5 black-text no-margin-bottom">Choose payment method</span>
+                <br>
+                <br>
+                <a ng-repeat="gateway in gateways"
+                   style="cursor: pointer;"
+                   class="highlight-button btn btn-lg button popup-modal-dismiss no-margin" ng-click="pay(gateway)">
+                    {{gateway.type}}</a>
+                <br>
+                <br>
+                <br>
+                <a class="highlight-button btn btn-small button popup-modal-dismiss no-margin pull-right"
+                   ng-click="closePayDialog()">Dismiss</a>
+
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="resetPasswordTemplate">
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right service_page_main_post align_center">
+            <div class="wrapper" style="text-align: center">
+                <span class="slider-subtitle5 black-text no-margin-bottom">Password resetted </span>
+                <h4 class="margin-four">An email has been sent to your mailbox, please check!</h4>
+                <br>
+                <br>
+                <br>
+                <a class="highlight-button btn btn-lg button popup-modal-dismiss no-margin"
+                   style="cursor: pointer;"
+                   ng-click="closerRsetPasswordModal()">OK</a>
+
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="contactUsSuccessTemplate">
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right service_page_main_post align_center">
+            <div class="wrapper" style="text-align: center">
+                <span class="slider-subtitle5 black-text no-margin-bottom">Message sent </span>
+                <h4 class="margin-four">We will contact you later, thanks!</h4>
+                <br>
+                <br>
+                <br>
+                <a class="highlight-button btn btn-lg button popup-modal-dismiss no-margin"
+                   style="cursor: pointer;"
+                   ng-click="closeModal()">OK</a>
+
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="contactUsFailTemplate">
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right service_page_main_post align_center">
+            <div class="wrapper" style="text-align: center">
+                <span class="slider-subtitle5 black-text no-margin-bottom">Sorry error happens</span>
+                <h4 class="margin-four">Please try again later</h4>
+                <br>
+                <br>
+                <br>
+                <a class="highlight-button btn btn-lg button popup-modal-dismiss no-margin"
+                   style="cursor: pointer;"
+                   ng-click="closeModal()">OK</a>
+
+            </div>
+        </div>
+    </div>
+</script>    <script>
+        /* Google Map Market Settings */
+
+        var mapMarkers = [
+            {
+                "id": "1",
+                "title": "CargoPress",
+                "address": "Changi Airport, Singapore",
+                "custompinimage": "\/cargopress\/images\/pin.png"
+            }
+        ]
+    </script>
+
+</head>
+<body>
+
+<!-- MAIN PAGE CONTAINER -->
+<div class="boxed-container">
+
+<!-- TOP BAR -->
+    <div class="top" ng-controller="cargoHeaderController" ng-cloak>
+
+        <div class="container">
+
+            <div class="top__tagline" ng-if="!isCn">Welcome to Freight Direct</div>
+            <div class="top__tagline" ng-if="isCn">欢迎来到Freight Direct</div>
+
+            <nav class="top__menu">
+                <ul class="top-navigation js-dropdown my-tools-button">
+                                    <li ng-if="isCn"><a href="about-us.html">关于我们</a></li>
+                    <li ng-if="!isCn"><a href="about-us.html">About Us</a></li>
+                    <li ng-if="isCn"><a href="contact.html">联系我们</a></li>
+                    <li ng-if="!isCn"><a href="contact.html">Contact Us</a></li>
+                    <li><a class="btn btn-info my-tool" target="_blank"
+                           href="http://fdnakl.webtracker.wisegrid.net/Login/Login.aspx?ReturnUrl=%2fDefault.aspx"
+                           ng-if="!isCn">customer login</a></li>
+                    <li><a class="btn btn-info my-tool" target="_blank"
+                           href="http://fdnakl.webtracker.wisegrid.net/Login/Login.aspx?ReturnUrl=%2fDefault.aspx"
+                           ng-if="isCn">用 户 登 录</a></li>
+                    <li ng-if="!isCn"><a style="cursor: pointer; color: black;" ng-click="setCn(true)"><i
+                            class="fa fa-language" aria-hidden="true"></i>&nbsp;中文</a></li>
+                    <li ng-if="isCn"><a style="cursor: pointer; color: black;" ng-click="setCn(false)"><i
+                            class="fa fa-language" aria-hidden="true"></i>&nbsp;English</a></li>
+                </ul>
+            </nav>
+
+        </div><!-- /.container -->
+
+    </div><!-- /.top -->
+
+    <!-- HEADER -->
+    <div class="header_container" ng-controller="cargoHeaderController" ng-cloak>
+
+        <div class="container">
+
+            <header class="header">
+
+                <div class="header__logo my-header__logo">
+                    <a href="index.html">
+                        <img style="width:346px; margin-bottom:34px; max-width: unset !important;margin-top: 3px !important;" class="img-responsive my-header-logo" srcset="cargopress/images/FD-logo.png"
+                             alt="CargoPress" src="cargopress/images/logo.png">
+                    </a>
+                    <button data-target="#cargopress-navbar-collapse" data-toggle="collapse" class="navbar-toggle"
+                            type="button">
+                        <span class="navbar-toggle__text" ng-if="!isCn">MENU</span>
+                        <span class="navbar-toggle__text" ng-if="isCn">目录</span>
+                        <span class="navbar-toggle__icon-bar">
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</span>
+                    </button>
+                </div><!-- /.header__logo -->
+
+                <div class="header__navigation">
+                    <nav class="collapse navbar-collapse" id="cargopress-navbar-collapse">
+                        <ul class="main-navigation js-main-nav js-dropdown">
+                            <li><a href="index.html" ng-if="!isCn">Home</a></li>
+                            <li><a href="index.html" ng-if="isCn">首页</a></li>
+
+                            <li><a href="news.html"ng-if="!isCn">News</a></li>
+                            <li><a href="news.html"ng-if="isCn">新闻</a></li>
+
+                            <li class="menu-item-has-children">
+                                <a href="services.html" ng-if="!isCn">Service</a>
+                                <a href="services.html" ng-if="isCn">服务</a>
+                                <ul role="menu" class="sub-menu">
+                                    <li><a href="cargo.html" ng-if="!isCn">CARGO</a></li>
+                                    <li><a href="cargo.html" ng-if="isCn">船运业务</a></li>
+
+                                    <li><a href="warehousing.html" ng-if="!isCn">WAREHOUSING</a></li>
+                                    <li><a href="warehousing.html" ng-if="isCn">仓储业务</a></li>
+
+                                    <li><a href="logistics-service.html" ng-if="!isCn">LOGISTICS SERVICE</a></li>
+                                    <li><a href="logistics-service.html" ng-if="isCn">物流服务</a></li>
+
+                                    <li><a href="trucking-service.html" ng-if="!isCn">TRUCKING SERVICE</a></li>
+                                    <li><a href="trucking-service.html" ng-if="isCn">运输服务</a></li>
+
+                                    <li><a href="storage.html" ng-if="!isCn">STORAGE</a></li>
+                                    <li><a href="storage.html" ng-if="isCn">第三方电商仓储</a></li>
+
+                                    <li><a href="custom-clearance.html" ng-if="!isCn">CUSTOMS CLEARANCE</a></li>
+                                    <li><a href="custom-clearance.html" ng-if="isCn">海关清关</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="menu-item-has-children">
+                                <a href="#" ng-if="!isCn">Partner links</a>
+                                <a href="#" ng-if="isCn">合作公司链接</a>
+                                <ul role="menu" class="sub-menu">
+                                    <li><a href="seafreight-links.html" ng-if="!isCn">SEAFREIGHT LINKS</a></li>
+                                    <li><a href="seafreight-links.html" ng-if="isCn">海洋货运链接</a></li>
+                                    <li><a href="shipping-lines.html" ng-if="!isCn">SHIPPING LINES</a></li>
+                                    <li><a href="shipping-lines.html" ng-if="isCn">海运线路</a></li>
+                                    <li><a href="port-links.html" ng-if="!isCn">PORT LINKS</a></li>
+                                    <li><a href="port-links.html" ng-if="isCn">港口链接</a></li>
+                                    <li><a href="courier-tracking-link.html" ng-if="!isCn">COURIER TRACKING LINK</a></li>
+                                    <li><a href="courier-tracking-link.html" ng-if="isCn">物流追踪链接</a></li>
+                                    <li><a href="documents.html" ng-if="!isCn">DOCUMENTS</a></li>
+                                    <li><a href="documents.html" ng-if="isCn">文档</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="menu-item-has-children">
+                                <a href="#" ng-if="!isCn">About us</a>
+                                <a href="#" ng-if="isCn">关于我们</a>
+                                <ul role="menu" class="sub-menu">
+                                    <li><a href="contact-au.html" ng-if="!isCn">Australian branch</a></li>
+                                    <li><a href="contact-au.html" ng-if="isCn">澳大利亚分支</a></li>
+                                    <li><a href="gallery.html" ng-if="!isCn">Gallery</a></li>
+                                    <li><a href="gallery.html" ng-if="isCn">实拍</a></li>
+                                    <li><a href="about-us.html" ng-if="!isCn">About us</a></li>
+                                    <li><a href="about-us.html" ng-if="isCn">关于我们</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div><!-- /.header__navigation -->
+
+                <div class="header__widgets my-icon-box">
+
+
+                    <div class="widget-icon-box">
+
+                        <div class="icon-box">
+                            <i class="fa fa-headphones"></i>
+                            <h4 class="icon-box__title" ng-if="!isCn">Call Us</h4>
+                            <h4 class="icon-box__title" ng-if="isCn">电话</h4>
+                            <span class="icon-box__subtitle">64 9 275 7646</span>
+                        </div>
+
+                    </div>
+
+                    <div class="widget-icon-box">
+
+                        <div class="icon-box">
+                            <i class="fa fa-location-arrow"></i>
+                            <h4 class="icon-box__title" ng-if="!isCn">Find us</h4>
+                            <h4 class="icon-box__title" ng-if="isCn">地址</h4>
+                            <span class="icon-box__subtitle">295 Landing Drive, Māngere, Auckland 2022</span>
+                        </div>
+
+                    </div>
+
+                    <div class="widget-icon-box">
+
+                        <div class="icon-box">
+                            <i class="fa fa-envelope-o"></i>
+                            <h4 class="icon-box__title" ng-if="!isCn">Email Us</h4>
+                            <h4 class="icon-box__title" ng-if="isCn">邮箱</h4>
+                            <a href="mailto:natasha@freightdirect.co.nz"><span class="icon-box__subtitle">natasha@freightdirect.co.nz</span></a>
+                        </div>
+
+                    </div>
+
+                    <div class="widget-icon-box my-home-flag pull-right">
+
+                        <div class="icon-box">
+                            <img src="cargopress/images/nz-flag.gif">
+                        </div>
+
+                    </div>
+
+                </div><!-- /.header__widgets -->
+
+
+            </header>
+
+        </div><!-- /.container -->
+
+    </div><!-- /.header_container --><script>
+    var qrId = '';
+    
+    var activityId = '';
+
+    var categoryId = '';
+
+    var orderId = '';
+
+    var clientId = '';
+         clientId = '32';
+
+    var clientIdStr = '';
+    if(clientId){
+        clientIdStr = '&clientId=' + clientId;
+    }
+
+    var keyword = '';
+
+    var footerId = '';
+
+    var hostUrl = '';
+        hostUrl = 'api.html';
+
+    var addressId = '';
+
+    var fxTheme = '';
+         fxTheme = 'cargopress';
+
+    var productId = '';
+</script>
+
+   <!-- MAIN TITLE -->
+    <div class="main-title" ng-controller="contactController" ng-cloak>
+        <div class="container">
+            <h1 class="main-title__primary" ng-if="!isCn">Courier tracking link</h1>
+            <h1 class="main-title__primary" ng-if="isCn">物流追踪链接</h1>
+        </div>
+    </div><!-- /.main-title -->
+
+   <div class="breadcrumbs" ng-controller="contactController" ng-cloak>
+       <div class="container">
+            <span>
+                <a class="home" href="index.html" title="Go to CargoPress." rel="v:url">Freight Direct</a>
+            </span>
+           <span>
+                <a class="post post-page" title="Go to Services." rel="v:url" ng-if="!isCn">Partner links</a>
+                <a class="post post-page" title="Go to Services." rel="v:url" ng-if="isCn">合作公司链接</a>
+            </span>
+           <span>
+                <span ng-if="!isCn">Courier tracking link</span>
+                <span ng-if="isCn">物流追踪链接</span>
+            </span>
+       </div>
+   </div><!-- /.breadcrumbs -->
+
+    <div class="container" ng-controller="contactController" ng-cloak>
+
+        <div class="row my-partner-links">
+
+            <main class="col-xs-12 col-md-9 col-md-push-3">
+
+                <div class="row margin-bottom-30">
+
+                    <div class="col-md-12">
+                        <h2 class="hentry__title" ng-if="!isCn">COURIER TRACKING LINK</h2>
+                        <h2 class="hentry__title" ng-if="isCn">物流追踪链接</h2>
+                        <div class="hentry__content">
+                            <ul>
+                                <li>TOLL: <a href="http://fasttracker-nz.tollgroup.com/">fasttracker-nz.tollgroup.com</a></li>
+                                <li>POST HASTE: <a href="http://www.posthaste.co.nz/tracktrace.html">www.posthaste.co.nz/tracktrace.html</a></li>
+                                <li>BARLOWS: <a target="_blank" href="https://mydel.info/Track/47564">https://mydel.info/Track/47564</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div><!-- /.row -->
+
+            </main><!-- /.col -->
+
+            <div class="col-xs-12 col-md-3 col-md-pull-9">
+
+                <div class="sidebar widget_nav_menu">
+                    <ul class="menu" id="menu-services-menu">
+                        <li>
+                            <a href="seafreight-links.html" ng-if="!isCn">SeaFreight Links</a>
+                            <a href="seafreight-links.html" ng-if="isCn">海洋货运链接</a>
+                        </li>
+                        <li>
+                            <a href="shipping-lines.html" ng-if="!isCn">Shipping Lines</a>
+                            <a href="shipping-lines.html" ng-if="isCn">海运线路</a>
+                        </li>
+                        <li>
+                            <a href="port-links.html" ng-if="!isCn">Port Links</a>
+                            <a href="port-links.html" ng-if="isCn">港口链接</a>
+                        </li>
+                        <li class="current-menu-item">
+                            <a href="courier-tracking-link.html" ng-if="!isCn">Courier tracking link</a>
+                            <a href="courier-tracking-link.html" ng-if="isCn">物流追踪链接</a>
+                        </li>
+                        <li>
+                            <a href="documents.html" ng-if="!isCn">Documents</a>
+                            <a href="documents.html" ng-if="isCn">文档</a>
+                        </li>
+                    </ul>
+                </div><!-- /.sidebar -->
+
+            </div><!-- /.col -->
+
+        </div><!-- /.row -->
+
+    </div><!-- /.container -->
+
+
+<!-- FOOTER -->
+    <footer class="footer" ng-controller="footerController" ng-cloak>
+
+        <div class="footer-top">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col-xs-12 col-md-4 my-footer-logo-area">
+
+                        <p class="my-footer-logo-text">
+                            <img alt="logo-footer" src="cargopress/images/FD-footer-logo.png" class="logo">
+                        </p>
+                        <p>
+                            We operate in logistics services, freight forwarding services, warehouseing which is our
+                            business....yet, customers are our engine.
+                        </p>
+                        <p ng-if="false">
+                            <a target="_blank" href="https://www.facebook.com/ProteusThemes"
+                               class="icon-container icon-container--square">
+                                <span class="fa fa-facebook"></span>
+                            </a>
+                            <a target="_blank" href="https://twitter.com/ProteusThemes"
+                               class="icon-container icon-container--square">
+                                <span class="fa fa-linkedin"></span>
+                            </a>
+                            <a target="_blank" href="http://themeforest.net/user/ProteusThemes/portfolio"
+                               class="icon-container icon-container--square">
+                                <span class="fa fa-google-plus"></span>
+                            </a>
+                        </p>
+
+                    </div><!-- /.row -->
+
+                    <div class="col-xs-12 col-md-2">
+
+                        <div class="widget_nav_menu">
+                            <h6 class="footer-top__headings" ng-if="!isCn">NAVIGATION</h6>
+                            <h6 class="footer-top__headings" ng-if="isCn">导航</h6>
+                            <ul>
+                                <li><a href="news.html" ng-if="!isCn">NEWS</a></li>
+                                <li><a href="news.html" ng-if="isCn">新闻</a></li>
+                                <li><a href="contact-au.html" ng-if="!isCn">AUSTRALIAN BRANCH</a></li>
+                                <li><a href="contact-au.html" ng-if="isCn">澳大利亚分支</a></li>
+                                <li><a href="gallery.html" ng-if="!isCn">GALLERY</a></li>
+                                <li><a href="gallery.html" ng-if="isCn">实拍</a></li>
+                                <li><a href="about-us.html" ng-if="!isCn">ABOUT US</a></li>
+                                <li><a href="about-us.html" ng-if="isCn">关于我们</a></li>
+                            </ul>
+                        </div><!-- /.widget_nav_menu -->
+
+                    </div><!-- /.row -->
+
+                    <div class="col-xs-12 col-md-2">
+
+                        <div class="widget_nav_menu">
+
+                            <h6 class="footer-top__headings" ng-if="!isCn">OUR SERVICES</h6>
+                            <h6 class="footer-top__headings" ng-if="isCn">我们的服务</h6>
+                            <ul>
+                                <li><a href="cargo.html" ng-if="!isCn">CARGO</a></li>
+                                <li><a href="cargo.html" ng-if="isCn">船运业务</a></li>
+                                <li><a href="warehousing.html" ng-if="!isCn">WAREHOUSING</a></li>
+                                <li><a href="warehousing.html" ng-if="isCn">仓储业务</a></li>
+                                <li><a href="logistics-service.html" ng-if="!isCn">LOGISTICS SERVICE</a></li>
+                                <li><a href="logistics-service.html" ng-if="isCn">物流服务</a></li>
+                                <li><a href="trucking-service.html" ng-if="!isCn">TRUCKING SERVICE</a></li>
+                                <li><a href="trucking-service.html" ng-if="isCn">运输服务</a></li>
+                                <li><a href="storage.html" ng-if="!isCn">STORAGE</a></li>
+                                <li><a href="storage.html" ng-if="isCn">第三方电商仓储</a></li>
+                                <li><a href="custom-clearance.html" ng-if="!isCn">CUSTOMS CLEARANCE</a></li>
+                                <li><a href="custom-clearance.html" ng-if="isCn">海关清算</a></li>
+                            </ul>
+
+                        </div><!-- /.widget_nav_menu -->
+
+                    </div><!-- /.row -->
+
+                    <div class="col-xs-12 col-md-2">
+
+                        <div class="widget_nav_menu">
+
+                            <h6 class="footer-top__headings" ng-if="!isCn">PARTNER LINKS</h6>
+                            <h6 class="footer-top__headings" ng-if="isCn">合作公司链接</h6>
+                            <ul>
+                                <li><a href="seafreight-links.html" ng-if="!isCn">SEAFREIGHT LINKS</a></li>
+                                <li><a href="shipping-lines.html" ng-if="!isCn">SHIPPING LINES</a></li>
+                                <li><a href="port-links.html" ng-if="!isCn">PORT LINKS</a></li>
+                                <li><a href="courier-tracking-link.html" ng-if="!isCn">COURIER TRACKING LINK</a></li>
+                                <li><a href="documents.html" ng-if="!isCn">DOCUMENTS</a></li>
+                                <li><a href="seafreight-links.html" ng-if="isCn">海洋货运链接</a></li>
+                                <li><a href="shipping-lines.html" ng-if="isCn">海运线路</a></li>
+                                <li><a href="port-links.html" ng-if="isCn">港口链接</a></li>
+                                <li><a href="courier-tracking-link.html" ng-if="isCn">物流追踪链接</a></li>
+                                <li><a href="documents.html" ng-if="isCn">文档</a></li>
+
+                            </ul>
+
+                        </div><!-- /.widget_nav_menu -->
+
+                    </div><!-- /.row -->
+
+                    <div class="col-xs-12 col-md-2">
+
+                        <h6 class="footer-top__headings" ng-if="!isCn">Contact us</h6>
+                        <h6 class="footer-top__headings" ng-if="isCn">联系我们</h6>
+                        <p ng-if="!isCn">
+                            We would love to talk to you about our service and quote you some rates. Contact us today!
+                        </p>
+                        <p ng-if="isCn">
+                            我们很乐意与您讨论我们的服务，并为您报价。 立即联系我们！
+                        </p>
+                        <p>
+                            <a href="contact.html" class="btn btn-info" ng-if="!isCn">Contact Now</a>
+                            <a href="contact.html" class="btn btn-info" ng-if="isCn">立刻联系</a>
+                        </p>
+
+                    </div><!-- /.row -->
+
+                </div><!-- /.row -->
+
+            </div><!-- /.footer -->
+
+        </div><!-- /.footer-top -->
+
+        <div class="footer-bottom">
+            <div class="container">
+                <div ng-if="!isCn">Copyright © 2018 Freight Direct . All Rights Reserved.</div>
+                <div ng-if="isCn">版权所有©2018 Freight Direct。 版权所有。</div>
+            </div><!-- /.container -->
+        </div><!-- /.footer-bottom -->
+    </footer></div><!-- /.boxed-container -->
+
+<script src="cargopress/js/jquery-2.1.4.min.js" type="text/javascript"></script>
+<script src="cargopress/js/bootstrap/carousel.js"></script>
+<script src="cargopress/js/bootstrap/transition.js"></script>
+<script src="cargopress/js/bootstrap/button.js"></script>
+<script src="cargopress/js/bootstrap/collapse.js"></script>
+<script src="cargopress/js/bootstrap/validator.js"></script>
+<script src="cargopress/js/underscore.js"></script>
+<script src="cargopress/js/NumberCounter.js"></script>
+<script src="cargopress/js/jquery.magnific-popup.min.js"></script>
+<script src="cargopress/js/custom.js"></script>
+<script src="https://maps.google.com/maps/api/js?sensor=false"></script>
+<script src="cargopress/js/SimpleMap.js"></script>
+<script src="cargopress/js/custom.js"></script>
+
+
+<!-- _________ angular js lib__________ -->
+<script src="js/app-libs/angular/angular.min.js"></script>
+<script src="js/app-libs/angular-busy-tracker/busy.min.js"></script>
+<script src="js/app-libs/spin.js/spin.min.js"></script>
+<script src="js/app-libs/angular-spinner/angular-spinner.min.js"></script>
+<script src="js/app-libs/ng-dialog/js/ngDialog.min.js"></script>
+<script src="js/app-libs/bootbox-js/bootbox.min.js"></script>
+<script src="js/app-libs/angular-messages/angular-messages.min.js"></script>
+<script src="js/app-libs/angular-resource/angular-resource.min.js"></script>
+
+<script src="js/app-libs/highcharts-ng/highstock.src.js"></script>
+<script src="js/app-libs/highcharts-ng/highcharts-ng.min.js"></script>
+<script src="js/app-libs/angular-wizard/dist/angular-wizard.min.js"></script>
+<script src="js/app-libs/dropzone/min/dropzone.min.js"></script>
+<script src="js/app-libs/ng-dropzone/dist/ng-dropzone.min.js"></script>
+
+<script src="js/app-libs/moment/moment.min.js"></script>
+<script src="js/app-libs/moment-timezone/moment-timezone-with-data.min.js"></script>
+<script src="js/app-libs/angular-datepicker/angular-datepicker.min.js"></script>
+<script src="js/app-libs/ng-toast/ngToast.min.js"></script>
+<script src="js/app-libs/angular-animate.min.js"></script>
+<script src="js/app-libs/angular-sanitize.min.js"></script>
+<script src="js/app-libs/angular-utils-pagination/dirPagination.js"></script>
+<script type="text/javascript" src="js/app-libs/lodash.min.js"></script>
+<!-- _________ angular js app -->
+<script src="js/app/app.js"></script>
+<script src="js/app/app-constant.js"></script>
+<script src="js/app/controllers/home.controller.js"></script>
+<script src="js/app/cargoexpress-controllers/cargo-home.controller.js"></script>
+<script src="js/app/controllers/products.controller.js"></script>
+<script src="js/app/controllers/faq.controller.js"></script>
+<script src="js/app/controllers/login.controller.js"></script>
+<script src="js/app/controllers/cart.controller.js"></script>
+<script src="js/app/controllers/order.controller.js"></script>
+<script src="js/app/controllers/order-detail.controller.js"></script>
+<script src="js/app/controllers/checkout.controller.js"></script>
+<script src="js/app/controllers/category.controller.js"></script>
+<script src="js/app/controllers/header.controller.js"></script>
+<script src="js/app/cargoexpress-controllers/cargo-header.controller.js"></script>
+<script src="js/app/controllers/register.controller.js"></script>
+<script src="js/app/controllers/footer.controller.js"></script>
+<script src="js/app/controllers/detail.controller.js"></script>
+<script src="js/app/controllers/address.controller.js"></script>
+<script src="js/app/controllers/dashboard.controller.js"></script>
+<script src="js/app/controllers/coin.controller.js"></script>
+<script src="js/app/controllers/add-address.controller.js"></script>
+<script src="js/app/controllers/account.controller.js"></script>
+<script src="js/app/controllers/coin-activity.controller.js"></script>
+<script src="js/app/controllers/find-password.controller.js"></script>
+<script src="js/app/controllers/contact.controller.js"></script>
+<script src="js/app/bege-controllers/bege-checkout.controller.js"></script>
+<script src="js/app/controllers/edit-address.controller.js"></script>
+<script src="js/app/controllers/website-news.controller.js"></script>
+
+
+
+<script src="js/app/services/account.service.js"></script>
+<script src="js/app/services/auth.service.js"></script>
+<script src="js/app/services/home.service.js"></script>
+<script src="js/app/services/order.service.js"></script>
+<script src="js/app/services/resources.service.js"></script>
+
+<script src="js/app/services/address.service.js"></script>
+<script src="js/app/services/app-user.service.js"></script>
+<script src="js/app/services/availability.service.js"></script>
+<script src="js/app/services/balance.service.js"></script>
+<script src="js/app/services/balance-detail.service.js"></script>
+<script src="js/app/services/cart.service.js"></script>
+<script src="js/app/services/cart-item.service.js"></script>
+<script src="js/app/services/category.service.js"></script>
+<script src="js/app/services/coin-activity.service.js"></script>
+<script src="js/app/services/coin-history.service.js"></script>
+<script src="js/app/services/content.service.js"></script>
+<script src="js/app/services/country.service.js"></script>
+<script src="js/app/services/coupon.service.js"></script>
+<script src="js/app/services/currency.service.js"></script>
+<script src="js/app/services/experience.service.js"></script>
+<script src="js/app/services/faq.service.js"></script>
+<script src="js/app/services/favorite.service.js"></script>
+<script src="js/app/services/feature-type.service.js"></script>
+<script src="js/app/services/feedback.service.js"></script>
+<script src="js/app/services/feedback-type.service.js"></script>
+<script src="js/app/services/footer.service.js"></script>
+<script src="js/app/services/gateway.service.js"></script>
+<script src="js/app/services/guest-requirement.service.js"></script>
+<script src="js/app/services/home-page-slider.service.js"></script>
+<script src="js/app/services/inventory-detail.service.js"></script>
+<script src="js/app/services/invitation.service.js"></script>
+<script src="js/app/services/language.service.js"></script>
+<script src="js/app/services/member-group.service.js"></script>
+<script src="js/app/services/product-multi.service.js"></script>
+<script src="js/app/services/product-single.service.js"></script>
+<script src="js/app/services/registration-answer.service.js"></script>
+<script src="js/app/services/registration-question.service.js"></script>
+<script src="js/app/services/registration-question-option.service.js"></script>
+<script src="js/app/services/shipment.service.js"></script>
+<script src="js/app/services/shipment-detail.service.js"></script>
+<script src="js/app/services/shipment-fee.service.js"></script>
+<script src="js/app/services/social-link.service.js"></script>
+<script src="js/app/services/tag.service.js"></script>
+<script src="js/app/services/term-condition.service.js"></script>
+<script src="js/app/services/transaction-single.service.js"></script>
+<script src="js/app/services/transaction-single-item.service.js"></script>
+<script src="js/app/services/website-column.service.js"></script>
+<script src="js/app/services/my.service.js"></script>
+<script src="js/app/services/profile.service.js"></script>
+<script src="js/app/services/website-news.service.js"></script>
+<script src="js/app/services/attribute.service.js"></script>
+
+
+<script src="js/app/directives/file-dropzone.directive.js"></script>
+<script src="js/app/directives/compare-password.directive.js"></script>
+<script src="js/app/directives/compare-to.directive.js"></script>
+<script src="js/app/directives/complex-password.directive.js"></script>
+<script src="js/app/directives/valid-email.directive.js"></script>
+
+</body>
+
+<!-- Mirrored from www.freightdirect.co.nz/courier-tracking-link by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 06 Sep 2021 11:32:59 GMT -->
+</html>
